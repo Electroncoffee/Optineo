@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 67491969}
   - component: {fileID: 67491968}
   - component: {fileID: 67491967}
+  - component: {fileID: 67491970}
   m_Layer: 8
   m_Name: Statue5
   m_TagString: LayerObject
@@ -232,6 +233,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &67491970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67491966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &123803594
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +333,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f99289e3c619c044ca6464bb23389e71, type: 3}
-  m_Color: {r: 0.29803923, g: 0.29803923, b: 0.29803923, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -679,6 +695,7 @@ GameObject:
   - component: {fileID: 222368608}
   - component: {fileID: 222368607}
   - component: {fileID: 222368606}
+  - component: {fileID: 222368609}
   m_Layer: 8
   m_Name: Statue7
   m_TagString: LayerObject
@@ -777,6 +794,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &222368609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222368605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &241798030
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,6 +961,7 @@ GameObject:
   - component: {fileID: 281814883}
   - component: {fileID: 281814882}
   - component: {fileID: 281814881}
+  - component: {fileID: 281814884}
   m_Layer: 8
   m_Name: Statue9
   m_TagString: LayerObject
@@ -1027,6 +1060,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &281814884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281814880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &293721470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,6 +1195,7 @@ GameObject:
   - component: {fileID: 331921491}
   - component: {fileID: 331921490}
   - component: {fileID: 331921489}
+  - component: {fileID: 331921492}
   m_Layer: 8
   m_Name: Statue3
   m_TagString: LayerObject
@@ -1245,6 +1294,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &331921492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331921488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &381901019
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,7 +2157,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f99289e3c619c044ca6464bb23389e71, type: 3}
-  m_Color: {r: 0.29803923, g: 0.29803923, b: 0.29803923, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2175,6 +2239,7 @@ GameObject:
   - component: {fileID: 865726586}
   - component: {fileID: 865726585}
   - component: {fileID: 865726584}
+  - component: {fileID: 865726587}
   m_Layer: 8
   m_Name: Statue10
   m_TagString: LayerObject
@@ -2273,6 +2338,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &865726587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865726583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &915251474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2397,7 +2477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   moveDistance: 1
-  playerScript: {fileID: 0}
+  playerScript: {fileID: 1915339591}
 --- !u!1 &960070704
 GameObject:
   m_ObjectHideFlags: 0
@@ -2518,6 +2598,7 @@ GameObject:
   - component: {fileID: 1010364790}
   - component: {fileID: 1010364789}
   - component: {fileID: 1010364788}
+  - component: {fileID: 1010364791}
   m_Layer: 8
   m_Name: Statue2
   m_TagString: LayerObject
@@ -2616,6 +2697,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1010364791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010364787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &1017030144
 GameObject:
   m_ObjectHideFlags: 0
@@ -2759,7 +2855,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f99289e3c619c044ca6464bb23389e71, type: 3}
-  m_Color: {r: 0.29803923, g: 0.29803923, b: 0.29803923, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2794,6 +2890,7 @@ GameObject:
   - component: {fileID: 1047911268}
   - component: {fileID: 1047911267}
   - component: {fileID: 1047911266}
+  - component: {fileID: 1047911269}
   m_Layer: 8
   m_Name: Statue8
   m_TagString: LayerObject
@@ -2892,6 +2989,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1047911269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047911265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &1081521044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3055,6 +3167,7 @@ GameObject:
   - component: {fileID: 1110594452}
   - component: {fileID: 1110594451}
   - component: {fileID: 1110594450}
+  - component: {fileID: 1110594453}
   m_Layer: 8
   m_Name: Statue13
   m_TagString: LayerObject
@@ -3153,6 +3266,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1110594453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110594449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &1112670433
 GameObject:
   m_ObjectHideFlags: 0
@@ -3273,6 +3401,7 @@ GameObject:
   - component: {fileID: 1127911261}
   - component: {fileID: 1127911260}
   - component: {fileID: 1127911259}
+  - component: {fileID: 1127911262}
   m_Layer: 8
   m_Name: Statue6
   m_TagString: LayerObject
@@ -3371,6 +3500,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1127911262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127911258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &1312051644
 GameObject:
   m_ObjectHideFlags: 0
@@ -3613,7 +3757,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552391708}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -3954,7 +4098,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f99289e3c619c044ca6464bb23389e71, type: 3}
-  m_Color: {r: 0.29803923, g: 0.29803923, b: 0.29803923, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4023,6 +4167,7 @@ GameObject:
   - component: {fileID: 1734750544}
   - component: {fileID: 1734750543}
   - component: {fileID: 1734750542}
+  - component: {fileID: 1734750545}
   m_Layer: 8
   m_Name: Statue4
   m_TagString: LayerObject
@@ -4121,6 +4266,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1734750545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734750541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &1792138507
 GameObject:
   m_ObjectHideFlags: 0
@@ -4459,6 +4619,7 @@ GameObject:
   - component: {fileID: 1901243425}
   - component: {fileID: 1901243424}
   - component: {fileID: 1901243423}
+  - component: {fileID: 1901243426}
   m_Layer: 8
   m_Name: Statue1
   m_TagString: LayerObject
@@ -4557,6 +4718,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1901243426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901243422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &1915339588
 GameObject:
   m_ObjectHideFlags: 0
@@ -4714,6 +4890,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   moveDistance: 1
+  isStop: 1
+  isActing: 1
 --- !u!212 &1915339592
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4811,6 +4989,7 @@ GameObject:
   - component: {fileID: 1928502729}
   - component: {fileID: 1928502728}
   - component: {fileID: 1928502727}
+  - component: {fileID: 1928502730}
   m_Layer: 8
   m_Name: Statue11
   m_TagString: LayerObject
@@ -4909,6 +5088,21 @@ Transform:
   m_Father: {fileID: 1081785974}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1928502730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928502726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 7
+  moveDistance: 1
+  playerScript: {fileID: 1915339591}
 --- !u!1 &1942991758
 GameObject:
   m_ObjectHideFlags: 0

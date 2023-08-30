@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed; // 이동 속도
     public float moveDistance; // 이동 거리
-    private bool isStop = true; // 정지 여부
-    private bool isActing = true;
+    public bool isStop = true; // 정지 여부
+    public bool isActing = true;
     private Dictionary<KeyCode, Vector3> Move_Key;
     private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
     private Vector3 Player_Start_Pos; //이동시 출발 좌표
     private Vector3 target_pos; //이동할 좌표
-    private RaycastHit2D raycast;
-    private int Object_type; //0,none  1,Object  2,Block
+    private Vector2 size;
+    private Collider2D col;
 
     void Awake()
     {
@@ -26,42 +25,40 @@ public class PlayerMove : MonoBehaviour
         Move_Key[KeyCode.DownArrow] = new Vector3(0, -moveDistance, 0); ; // 하
         Move_Key[KeyCode.LeftArrow] = new Vector3(-moveDistance, 0, 0); ; // 좌
         Move_Key[KeyCode.RightArrow] = new Vector3(moveDistance, 0, 0); ; // 우
+        size = new Vector2(63 / 64, 63 / 64);
+
     }
     void Update() //너무 길고 네스트도 커져서 조금 분할할 필요가 있어보임
     {
-        if (isStop && isActing)
+        if (isStop & isActing)
         {
             foreach (KeyValuePair<KeyCode, Vector3> item in Move_Key)//이동키가 눌렸는지 전부 확인
             {
                 if (Input.GetKey(item.Key)) //눌리면
                 {
-                    raycast = Physics2D.Raycast(transform.position, item.Value, 1f, LayerMask.GetMask("Block", "Object"));
-                    if (raycast.collider != null)//이동방향에 무언가 있음
+                    col = Physics2D.OverlapBox(transform.position + item.Value, size, 0, LayerMask.GetMask("Block", "Object"));
+                    if (col == null) // 이동방향에 아무것도 없음
                     {
-                        if (raycast.collider.gameObject.layer == LayerMask.NameToLayer("Object")) //오브젝트
-                        {
-                            raycast.collider.gameObject.GetComponent<ObjectMovement>().push(item.Value);//푸쉬 호출
-                            audioSource.Play();
-                            if (item.Key == KeyCode.LeftArrow)
-                                spriteRenderer.flipX = true;
-                            else if (item.Key == KeyCode.RightArrow)
-                                spriteRenderer.flipX = false;
-                            //발차기 애니메이션 넣어야함
-                        }
-                    }
-                    else
-                    {
-                        //아무것도 없음
                         audioSource.Play();
                         isStop = false; //움직이게
                         Player_Start_Pos = transform.position; //좌표저장(시작지점)
                         target_pos = Player_Start_Pos + (item.Value * moveDistance); //좌표저장(끝지점)
-                        if (item.Key == KeyCode.LeftArrow)
-                            spriteRenderer.flipX = true;
-                        else if (item.Key == KeyCode.RightArrow)
-                            spriteRenderer.flipX = false;
                     }
-
+                    else // 무언가 있음
+                    {
+                        if (col.gameObject.layer == LayerMask.NameToLayer("Object")) //오브젝트
+                        {
+                            isActing = false;
+                            col.gameObject.GetComponent<ObjectMovement>().push(item.Value);//푸쉬 호출
+                            audioSource.Play();
+                            //발차기 애니메이션 넣어야함
+                        }
+                    }
+                    if (item.Key == KeyCode.LeftArrow)//수평이동 flip처리
+                        spriteRenderer.flipX = true;
+                    else if (item.Key == KeyCode.RightArrow)
+                        spriteRenderer.flipX = false;
+                    return;
                 }
             }
         }
@@ -73,6 +70,7 @@ public class PlayerMove : MonoBehaviour
         if (transform.position.Equals(target_pos))
             isStop = true;
     }
+
     public void flag_isActing(bool flag)
     {
         isActing = flag;
