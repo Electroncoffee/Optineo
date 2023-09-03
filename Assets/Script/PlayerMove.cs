@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     private Vector3 target_pos; //이동할 좌표
     private Vector2 size;
     private Collider2D col;
+    public HpManager hpManager;
 
     void Awake()
     {
@@ -43,6 +45,7 @@ public class PlayerMove : MonoBehaviour
                         isStop = false; //움직이게
                         Player_Start_Pos = transform.position; //좌표저장(시작지점)
                         target_pos = Player_Start_Pos + (item.Value * moveDistance); //좌표저장(끝지점)
+                        hpManager.damage(1);
                     }
                     else // 무언가 있음
                     {
@@ -51,6 +54,7 @@ public class PlayerMove : MonoBehaviour
                             isActing = false;
                             col.gameObject.GetComponent<ObjectMovement>().push(item.Value);//푸쉬 호출
                             audioSource.Play();
+                            hpManager.damage(1);
                             //발차기 애니메이션 넣어야함
                         }
                     }
