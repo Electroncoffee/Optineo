@@ -38,26 +38,32 @@ public class PlayerMove : MonoBehaviour
             {
                 if (Input.GetKey(item.Key)) //눌리면
                 {
-                    col = Physics2D.OverlapBox(transform.position + item.Value, size, 0, LayerMask.GetMask("Block", "Object"));
+                    col = Physics2D.OverlapBox(transform.position + item.Value, size, 0, LayerMask.GetMask("Block","Object"));
                     if (col == null) // 이동방향에 아무것도 없음
                     {
                         audioSource.Play();
                         isStop = false; //움직이게
                         Player_Start_Pos = transform.position; //좌표저장(시작지점)
                         target_pos = Player_Start_Pos + (item.Value * moveDistance); //좌표저장(끝지점)
-                        hpManager.damage(1);
+                        
                     }
                     else // 무언가 있음
                     {
+                        target_pos = transform.position;
+                        if (col.gameObject.layer == LayerMask.NameToLayer("Block"))
+                        {
+                            return;
+                        }
                         if (col.gameObject.layer == LayerMask.NameToLayer("Object")) //오브젝트
                         {
                             isActing = false;
                             col.gameObject.GetComponent<ObjectMovement>().push(item.Value);//푸쉬 호출
                             audioSource.Play();
-                            hpManager.damage(1);
                             //발차기 애니메이션 넣어야함
                         }
+                        
                     }
+                    hpManager.Scan_Damaged(Physics2D.OverlapBox(target_pos, size, 0)?.gameObject);
                     if (item.Key == KeyCode.LeftArrow)//수평이동 flip처리
                         spriteRenderer.flipX = true;
                     else if (item.Key == KeyCode.RightArrow)

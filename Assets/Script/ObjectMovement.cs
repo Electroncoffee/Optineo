@@ -13,10 +13,12 @@ public class ObjectMovement : MonoBehaviour
     private float shakeAmount = 0.2f; // 흔들림의 강도
     private float shakeDuration = 0.1f; // 흔들림 지속 시간
     private Vector3 initialPosition;
+    private new AudioSource audio;
     public PlayerMove playerScript;
     private void Awake()
     {
         size = new Vector2(63 / 64, 63 / 64);
+        audio = GetComponent<AudioSource>();
     }
     private void FixedUpdate()
     {
@@ -35,6 +37,7 @@ public class ObjectMovement : MonoBehaviour
     public void push(Vector3 pos)
     {
         col = Physics2D.OverlapBox(transform.position + pos, size, 0, LayerMask.GetMask("Block", "Object"));
+        audio.Play();
         if (col == null) // 이동방향에 아무것도 없음
         {
             target_pos = transform.position + (pos * moveDistance);

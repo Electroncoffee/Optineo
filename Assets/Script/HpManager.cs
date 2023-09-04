@@ -17,4 +17,20 @@ public class HpManager : MonoBehaviour
         Hp -= d;
         uiManager.Hp_Update(Hp);
     }
+#nullable enable
+    public void Scan_Damaged(GameObject? obj)
+    {
+        if (obj != null)
+        {
+            Debug.Log(obj.name);
+        }
+        if (obj == null || obj.layer != LayerMask.NameToLayer("Field"))
+            damage(1);
+        else
+        {
+            damage(obj.GetComponent<FieldType>().damage);
+            obj.GetComponent<AudioSource>().Play();
+        }
+    }
+#nullable disable
 }
