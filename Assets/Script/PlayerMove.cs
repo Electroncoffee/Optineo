@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -57,7 +58,7 @@ public class PlayerMove : MonoBehaviour
                         if (col.gameObject.layer == LayerMask.NameToLayer("Object")) //오브젝트
                         {
                             isActing = false;
-                            col.gameObject.GetComponent<ObjectMovement>().push(item.Value);//푸쉬 호출
+                            col.GetComponent<icall>().call(item.Value);
                             audioSource.Play();
                             //발차기 애니메이션 넣어야함
                         }
@@ -83,6 +84,15 @@ public class PlayerMove : MonoBehaviour
 
     public void flag_isActing(bool flag)
     {
+        isActing = flag;
+    }
+    public void flag_isActing(bool flag, float Time)
+    {
+        StartCoroutine(Act_Func(flag, Time));
+    }
+    private IEnumerator Act_Func(bool flag, float Time)
+    {
+        yield return new WaitForSeconds(Time);
         isActing = flag;
     }
 }

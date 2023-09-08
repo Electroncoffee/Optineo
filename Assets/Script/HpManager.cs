@@ -20,13 +20,13 @@ public class HpManager : MonoBehaviour
 #nullable enable
     public void Scan_Damaged(GameObject? obj)
     {
-        if (obj != null)
+        if (obj != null) //오브젝트 있음
         {
             Debug.Log(obj.name);
         }
-        if (obj == null || obj.layer != LayerMask.NameToLayer("Field"))
+        if (obj == null || obj.layer != LayerMask.NameToLayer("Field")) //오브젝트가 없거나 필드임
             damage(1);
-        else
+        else //오브젝트가 있고 필드임
         {
             damage(obj.GetComponent<FieldType>().damage);
             obj.GetComponent<AudioSource>().Play();

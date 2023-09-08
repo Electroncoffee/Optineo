@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f93b8396c01555340b11e43036a41067
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playerScript: {instanceID: 0}
+  - hp: {instanceID: 0}
+  - LayerManager: {instanceID: 0}
+  - clip: {fileID: 8300000, guid: 2116fa914cb3ab8449826a2b2e637165, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

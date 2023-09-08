@@ -7,10 +7,21 @@ using UnityEngine;
  *************************/
 public class ObjectLayerManager : MonoBehaviour
 {
-    GameObject[] objects; // "Object" 태그를 가진 오브젝트를 찾습니다.
+    GameObject[] Allobjects; // 모든 오브젝트
+    GameObject[] noneobjects; // none 오브젝트
+    List<GameObject> applyobjects;
     private void Awake()
     {
-        objects = GameObject.FindGameObjectsWithTag("LayerObject");//항상 LoadXml뒤에 나와야한다.
+        Allobjects = GameObject.FindObjectsOfType<GameObject>();
+        noneobjects = GameObject.FindGameObjectsWithTag("none");
+        applyobjects = new List<GameObject>();
+        foreach (GameObject obj in Allobjects)
+        {
+            if (!ContainsObject(noneobjects, obj))
+            {
+                applyobjects.Add(obj);
+            }
+        }
     }
     private void Update()
     {
@@ -18,7 +29,7 @@ public class ObjectLayerManager : MonoBehaviour
     }
     private void Layer_Update()
     {
-        foreach (GameObject obj in objects)
+        foreach (GameObject obj in applyobjects)
         {
             SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
 
@@ -29,8 +40,23 @@ public class ObjectLayerManager : MonoBehaviour
             }
         }
     }
-    private void OnRenderObject()// 동적으로 오브젝트가 나올경우를 대비
+    public void AddObject(GameObject obj)// 동적으로 오브젝트가 나올경우를 대비
     {
-        objects = GameObject.FindGameObjectsWithTag("LayerObject");
+        applyobjects.Add(obj);
+    }
+    public void RemoveObject(GameObject obj)
+    {
+        applyobjects.Remove(obj);
+    }
+    private bool ContainsObject(GameObject[] objects, GameObject obj)
+    {
+        foreach (GameObject item in objects)
+        {
+            if (item == obj)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
