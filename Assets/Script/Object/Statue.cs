@@ -17,6 +17,7 @@ public class Statue : MonoBehaviour, icall
     public AudioClip clip;
     public SoundManager soundManager;
     public PlayerMove playerScript;
+    public HpManager hpManager;
     private void Awake()
     {
         size = new Vector2(63 / 64, 63 / 64);
@@ -39,6 +40,7 @@ public class Statue : MonoBehaviour, icall
     {
         col = Physics2D.OverlapBox(transform.position + pos, size, 0, LayerMask.GetMask("Block", "Object"));
         soundManager.Play(clip);
+        hpManager.damage(1);
         if (col == null) // 이동방향에 아무것도 없음
         {
             target_pos = transform.position + (pos * moveDistance);

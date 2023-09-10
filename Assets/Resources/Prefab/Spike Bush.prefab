@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3673357429382205760}
   m_Layer: 7
   m_Name: Spike Bush
-  m_TagString: LayerObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

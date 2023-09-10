@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     public bool isStop = true; // 정지 여부
     public bool isActing = true;
     private Dictionary<KeyCode, Vector3> Move_Key;
+    private Animator anim;
     private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
     private Vector3 Player_Start_Pos; //이동시 출발 좌표
@@ -21,6 +22,7 @@ public class PlayerMove : MonoBehaviour
 
     void Awake()
     {
+        anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         Move_Key = new Dictionary<KeyCode, Vector3>();
@@ -29,7 +31,6 @@ public class PlayerMove : MonoBehaviour
         Move_Key[KeyCode.LeftArrow] = new Vector3(-moveDistance, 0, 0); ; // 좌
         Move_Key[KeyCode.RightArrow] = new Vector3(moveDistance, 0, 0); ; // 우
         size = new Vector2(63 / 64, 63 / 64);
-
     }
     void Update() //너무 길고 네스트도 커져서 조금 분할할 필요가 있어보임
     {
@@ -39,13 +40,15 @@ public class PlayerMove : MonoBehaviour
             {
                 if (Input.GetKey(item.Key)) //눌리면
                 {
-                    col = Physics2D.OverlapBox(transform.position + item.Value, size, 0, LayerMask.GetMask("Block","Object"));
+                    col = Physics2D.OverlapBox(transform.position + item.Value, size, 0, LayerMask.GetMask("Block","Object","Field","Item"));
                     if (col == null) // 이동방향에 아무것도 없음
                     {
+                        anim.Play("Dash_");
                         audioSource.Play();
                         isStop = false; //움직이게
                         Player_Start_Pos = transform.position; //좌표저장(시작지점)
                         target_pos = Player_Start_Pos + (item.Value * moveDistance); //좌표저장(끝지점)
+                        hpManager.damage(1);
                         
                     }
                     else // 무언가 있음
@@ -55,16 +58,23 @@ public class PlayerMove : MonoBehaviour
                         {
                             return;
                         }
-                        if (col.gameObject.layer == LayerMask.NameToLayer("Object")) //오브젝트
+                        else if (col.gameObject.layer == LayerMask.NameToLayer("Object")) //오브젝트
                         {
                             isActing = false;
                             col.GetComponent<icall>().call(item.Value);
                             audioSource.Play();
                             //발차기 애니메이션 넣어야함
                         }
-                        
+                        else //필드&아이템
+                        {
+                            anim.Play("Dash_");
+                            audioSource.Play();
+                            isStop = false; //움직이게
+                            Player_Start_Pos = transform.position; //좌표저장(시작지점)
+                            target_pos = Player_Start_Pos + (item.Value * moveDistance); //좌표저장(끝지점)
+                            col.GetComponent<icall>().call(item.Value);
+                        }
                     }
-                    hpManager.Scan_Damaged(Physics2D.OverlapBox(target_pos, size, 0)?.gameObject);
                     if (item.Key == KeyCode.LeftArrow)//수평이동 flip처리
                         spriteRenderer.flipX = true;
                     else if (item.Key == KeyCode.RightArrow)
@@ -94,6 +104,10 @@ public class PlayerMove : MonoBehaviour
     {
         yield return new WaitForSeconds(Time);
         isActing = flag;
+    }
+    public void playerdead()
+    {
+        anim.Play("Dead_");
     }
 }
 

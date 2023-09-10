@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4062499245922619247}
   m_Layer: 6
   m_Name: Channel1
-  m_TagString: LayerObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
