@@ -25,7 +25,6 @@ public class Shake : MonoBehaviour
         {
             Vector3 randomOffset = Random.insideUnitSphere * shakeAmount;
             transform.position = initialPosition + randomOffset;
-
             elapsedTime += Time.deltaTime;
             yield return null;
         }

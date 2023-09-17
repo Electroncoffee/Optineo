@@ -125,5 +125,6 @@ MonoBehaviour:
   moveSpeed: 7
   moveDistance: 1
   clip: {fileID: 8300000, guid: 2f731d0d27d44cb45a1ed6f140c5ed95, type: 3}
-  soundManager: {fileID: 0}
+  soundManager: {fileID: 2022462685834858551, guid: 1c8b67224e0e4f647b9583fcefd65a1a, type: 3}
   playerScript: {fileID: 0}
+  hpManager: {fileID: 0}

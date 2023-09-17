@@ -6,7 +6,7 @@ public class key : MonoBehaviour, icall
 {
     public Inventory item;
     public ObjectLayerManager LayerManager;
-    public SoundManager soundManager;
+    public SceneSoundManager soundManager;
     public AudioClip clip;
     public void call(Vector3 pos)
     {

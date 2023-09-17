@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Arrival : MonoBehaviour, icall
 {
@@ -11,6 +12,7 @@ public class Arrival : MonoBehaviour, icall
         if (inven.has_key)
         {
             Debug.Log("도착");
+            SceneManager.LoadScene("Stage-2");
         }
     }
 }

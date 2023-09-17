@@ -10,7 +10,7 @@ public class ObjectLayerManager : MonoBehaviour
     GameObject[] Allobjects; // 모든 오브젝트
     GameObject[] noneobjects; // none 오브젝트
     List<GameObject> applyobjects;
-    private void Awake()
+    private void Start()
     {
         Allobjects = GameObject.FindObjectsOfType<GameObject>();
         noneobjects = GameObject.FindGameObjectsWithTag("none");
@@ -58,5 +58,18 @@ public class ObjectLayerManager : MonoBehaviour
             }
         }
         return false;
+    }
+    public void reloadObjectLayer()
+    {
+        Allobjects = GameObject.FindObjectsOfType<GameObject>();
+        noneobjects = GameObject.FindGameObjectsWithTag("none");
+        applyobjects = new List<GameObject>();
+        foreach (GameObject obj in Allobjects)
+        {
+            if (!ContainsObject(noneobjects, obj))
+            {
+                applyobjects.Add(obj);
+            }
+        }
     }
 }

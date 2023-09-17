@@ -12,25 +12,19 @@ using UnityEngine;
  *************************/
 public class XmlManager : MonoBehaviour
 {
-    public bool ObjectLoad;
-    public string XmlName;
-    private void Awake()
-    {
-        if (ObjectLoad)
-            LoadXml();
-    }
-    public void LoadXml()
+    public XmlDocument LoadXml(string XmlName)
     {
         if (XmlName != null)
         {
             XmlDocument XmlDoc = new XmlDocument();
             XmlDoc.Load(PathMaker(XmlName));
             Debug.Log("XmlName: " + XmlDoc.Name + " is succesfully Load!");
-            xml_parsing(XmlDoc);
+            return XmlDoc;
         }
         else
         {
             Debug.Log("Xml Load Fail!");
+            return null;
         }
     }
     private string PathMaker(string XmlName) //Xml위치로 상대주소 만들어줌

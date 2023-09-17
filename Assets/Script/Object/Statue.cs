@@ -15,7 +15,7 @@ public class Statue : MonoBehaviour, icall
     private float shakeDuration = 0.1f; // 흔들림 지속 시간
     private Vector3 initialPosition; //쉐이킹 좌표
     public AudioClip clip;
-    public SoundManager soundManager;
+    public SceneSoundManager soundManager;
     public PlayerMove playerScript;
     public HpManager hpManager;
     private void Awake()
@@ -59,7 +59,7 @@ public class Statue : MonoBehaviour, icall
         {
             Vector3 randomOffset = UnityEngine.Random.insideUnitSphere * shakeAmount;
             transform.position = initialPosition + randomOffset;
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
         transform.position = initialPosition;

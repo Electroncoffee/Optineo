@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
+using static UnityEditor.Progress;
 
 public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed; // 이동 속도
     public float moveDistance; // 이동 거리
-    public bool isStop = true; // 정지 여부
-    public bool isActing = true;
+    public bool isStop; // 정지 여부
+    public bool isActing;
     private Dictionary<KeyCode, Vector3> Move_Key;
     private Animator anim;
     private AudioSource audioSource;
@@ -22,6 +23,8 @@ public class PlayerMove : MonoBehaviour
 
     void Awake()
     {
+        isStop = true; // 정지 여부
+        isActing = true;
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -34,7 +37,7 @@ public class PlayerMove : MonoBehaviour
     }
     void Update() //너무 길고 네스트도 커져서 조금 분할할 필요가 있어보임
     {
-        if (isStop & isActing)
+        if (isStop && isActing)
         {
             foreach (KeyValuePair<KeyCode, Vector3> item in Move_Key)//이동키가 눌렸는지 전부 확인
             {
@@ -49,37 +52,33 @@ public class PlayerMove : MonoBehaviour
                         Player_Start_Pos = transform.position; //좌표저장(시작지점)
                         target_pos = Player_Start_Pos + (item.Value * moveDistance); //좌표저장(끝지점)
                         hpManager.damage(1);
-                        
+                        flip_x(item.Key);
                     }
                     else // 무언가 있음
                     {
                         target_pos = transform.position;
-                        if (col.gameObject.layer == LayerMask.NameToLayer("Block"))
+                        switch (LayerMask.LayerToName(col.gameObject.layer))
                         {
-                            return;
-                        }
-                        else if (col.gameObject.layer == LayerMask.NameToLayer("Object")) //오브젝트
-                        {
-                            isActing = false;
-                            col.GetComponent<icall>().call(item.Value);
-                            audioSource.Play();
-                            //발차기 애니메이션 넣어야함
-                        }
-                        else //필드&아이템
-                        {
-                            anim.Play("Dash_");
-                            audioSource.Play();
-                            isStop = false; //움직이게
-                            Player_Start_Pos = transform.position; //좌표저장(시작지점)
-                            target_pos = Player_Start_Pos + (item.Value * moveDistance); //좌표저장(끝지점)
-                            col.GetComponent<icall>().call(item.Value);
+                            case "Block":
+                                return;
+                            case "Object":
+                                isActing = false;
+                                col.GetComponent<icall>().call(item.Value);
+                                audioSource.Play();
+                                flip_x(item.Key);
+                                return;
+                            case "Field":
+                            case "Item":
+                                anim.Play("Dash_");
+                                audioSource.Play();
+                                isStop = false; //움직이게
+                                Player_Start_Pos = transform.position; //좌표저장(시작지점)
+                                target_pos = Player_Start_Pos + (item.Value * moveDistance); //좌표저장(끝지점)
+                                col.GetComponent<icall>().call(item.Value);
+                                flip_x(item.Key);
+                                return;
                         }
                     }
-                    if (item.Key == KeyCode.LeftArrow)//수평이동 flip처리
-                        spriteRenderer.flipX = true;
-                    else if (item.Key == KeyCode.RightArrow)
-                        spriteRenderer.flipX = false;
-                    return;
                 }
             }
         }
@@ -92,12 +91,21 @@ public class PlayerMove : MonoBehaviour
             isStop = true;
     }
 
+    public void flip_x(KeyCode Key)
+    {
+        if (Key == KeyCode.LeftArrow)//수평이동 flip처리
+            spriteRenderer.flipX = true;
+        else if (Key == KeyCode.RightArrow)
+            spriteRenderer.flipX = false;
+    }
     public void flag_isActing(bool flag)
     {
         isActing = flag;
+        Debug.Log("isActing now : " + flag);
     }
     public void flag_isActing(bool flag, float Time)
     {
+        Debug.Log("isActing now : " + flag);
         StartCoroutine(Act_Func(flag, Time));
     }
     private IEnumerator Act_Func(bool flag, float Time)
@@ -105,76 +113,12 @@ public class PlayerMove : MonoBehaviour
         yield return new WaitForSeconds(Time);
         isActing = flag;
     }
-    public void playerdead()
+    public void dead()
     {
         anim.Play("Dead_");
     }
-}
-
-/*
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-using static UnityEditor.Progress;
-
-/**************************
- * 기본적인 이동 구현
- * horizontal -1,1 좌,우
- * vertical   -1,1 하,상
- * 오브젝트 룰 추가 후 이동조건 체크 추가해야함
- * 애니메이션 추가 해야함
- **************************
-
-public class PlayerMove : MonoBehaviour
-{
-    private SpriteRenderer spriteRenderer;
-    int hori; int verti; //좌우, 상하
-    int prehori; int preverti; //이전프레임 좌우, 상하
-    private Vector3 Player_Start_Pos; //이동시 출발 좌표
-    private Vector3 target_pos; //이동할 좌표
-    private Vector3 delta_pos; //수정치 좌표
-    public float moveSpeed; // 이동 속도
-    public float moveDistance; // 이동 거리
-    public bool isStop = true; // 정지 여부
-    void Awake()
+    public void Idle()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        hori = 0; verti = 0; prehori = 0; preverti = 0;
-    }
-    void Update()
-    {
-        hori = (int)Input.GetAxisRaw("Horizontal");
-        verti = (int)Input.GetAxisRaw("Vertical");
-        if (isStop)
-        {
-            if (hori != 0 && hori != prehori) //좌우
-            {
-                isStop = false; //움직이게
-                Player_Start_Pos = transform.position; //좌표저장(시작지점)
-                target_pos = Player_Start_Pos + (Vector3.right * hori * moveDistance); //좌표저장(끝지점)
-                Debug.Log(target_pos);
-                if (hori == 1)
-                    spriteRenderer.flipX = false;
-                else
-                    spriteRenderer.flipX = true;
-            }
-            if (verti != 0 && verti != preverti) //상하
-            {
-                isStop = false; //움직이게
-                Player_Start_Pos = transform.position; //좌표저장(시작지점)
-                target_pos = Player_Start_Pos + (Vector3.up * verti * moveDistance); //좌표저장(끝지점)
-            }
-        }
-        prehori = hori;
-        preverti = verti;
-    }
-    private void FixedUpdate()
-    {
-        if (!isStop) //움직이면
-            transform.position = Vector3.MoveTowards(transform.position, target_pos, Time.deltaTime * moveSpeed);
-        if (transform.position.Equals(target_pos))
-            isStop = true;
+        anim.Play("Idle_");
     }
 }
-*/

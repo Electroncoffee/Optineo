@@ -8,7 +8,7 @@ public class BreakBush : MonoBehaviour, icall
     public PlayerMove playerScript;
     public HpManager hp;
     public ObjectLayerManager LayerManager;
-    public SoundManager soundManager;
+    public SceneSoundManager soundManager;
     public AudioClip clip;
     public void call(Vector3 pos)
     {
