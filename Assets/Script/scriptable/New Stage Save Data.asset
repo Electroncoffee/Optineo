@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb00ac0c6cfa42d4394309712f3c8302, type: 3}
   m_Name: New Stage Save Data
   m_EditorClassIdentifier: 
-  Max_hp: 48
+  Max_hp: 50
