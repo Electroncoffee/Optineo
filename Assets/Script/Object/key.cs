@@ -8,16 +8,21 @@ public class key : MonoBehaviour, icall
     public ObjectLayerManager LayerManager;
     public SceneSoundManager soundManager;
     public AudioClip clip;
+    public GameObject key_effect;
+    SpriteRenderer sr;
+    bool flag = true;
+    private void Start()
+    {
+        sr = GetComponent<SpriteRenderer>();
+    }
     public void call(Vector3 pos)
     {
-        soundManager.Play(clip);
-        item.has_key = true;
-        LayerManager.RemoveObject(this.gameObject);
-        Destroy(this.gameObject);
-
-    }
-    void Start()
-    {
-        
+        if (flag)
+        {
+            flag = false;
+            soundManager.Play(clip);
+            key_effect.SetActive(true);
+            item.has_key = true;
+        }
     }
 }
