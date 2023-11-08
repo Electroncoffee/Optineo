@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviour
                     col = Physics2D.OverlapBox(transform.position + item.Value, size, 0, LayerMask.GetMask("Block","Object","Field","Item"));
                     if (col == null) // 이동방향에 아무것도 없음
                     {
-                        anim.Play("Dash_");
+                        anim.Play("Dash_3");
                         audioSource.Play();
                         isStop = false; //움직이게
                         Player_Start_Pos = transform.position; //좌표저장(시작지점)
@@ -67,7 +67,7 @@ public class PlayerMove : MonoBehaviour
                                 return;
                             case "Field":
                             case "Item":
-                                anim.Play("Dash_");
+                                anim.Play("Dash_3");
                                 audioSource.Play();
                                 isStop = false; //움직이게
                                 Player_Start_Pos = transform.position; //좌표저장(시작지점)
@@ -92,9 +92,9 @@ public class PlayerMove : MonoBehaviour
     public void flip_x(KeyCode Key)
     {
         if (Key == KeyCode.LeftArrow)//수평이동 flip처리
-            spriteRenderer.flipX = true;
-        else if (Key == KeyCode.RightArrow)
             spriteRenderer.flipX = false;
+        else if (Key == KeyCode.RightArrow)
+            spriteRenderer.flipX = true;
     }
     public void flag_isActing(bool flag)
     {
