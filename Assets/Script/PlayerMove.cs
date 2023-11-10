@@ -9,7 +9,13 @@ public class PlayerMove : MonoBehaviour
     public float moveDistance; // 이동 거리
     public bool isStop; // 정지 여부
     public bool isActing;
-    private Dictionary<KeyCode, Vector3> Move_Key;
+    private Dictionary<KeyCode, Vector3> Move_Key = new Dictionary<KeyCode, Vector3>()
+    {
+        [KeyCode.UpArrow] = new Vector3(0, 1, 0), // 상
+        [KeyCode.DownArrow] = new Vector3(0, -1, 0), // 하
+        [KeyCode.LeftArrow] = new Vector3(-1, 0, 0), // 좌
+        [KeyCode.RightArrow] = new Vector3(1, 0, 0), // 우
+    };
     private Animator anim;
     private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
@@ -25,12 +31,7 @@ public class PlayerMove : MonoBehaviour
         isActing = true;
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        Move_Key = new Dictionary<KeyCode, Vector3>();
-        Move_Key[KeyCode.UpArrow] = new Vector3(0, moveDistance, 0); ; // 상
-        Move_Key[KeyCode.DownArrow] = new Vector3(0, -moveDistance, 0); ; // 하
-        Move_Key[KeyCode.LeftArrow] = new Vector3(-moveDistance, 0, 0); ; // 좌
-        Move_Key[KeyCode.RightArrow] = new Vector3(moveDistance, 0, 0); ; // 우
+        spriteRenderer = GetComponent<SpriteRenderer>();//
         size = new Vector2(63 / 64, 63 / 64);
     }
     void Update() //너무 길고 네스트도 커져서 조금 분할할 필요가 있어보임
