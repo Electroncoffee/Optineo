@@ -1,8 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using UnityEditor.SceneTemplate;
 using UnityEngine;
 using UnityEngine.UI;
+
+
+//컷씬 이미지가 하나씩 내려오기(올라가기)
+//검게 페이드 아웃/페이드 인
+
 
 [System.Serializable]
 public class Dialogue //다이얼로그 요소 정보를 담은 클래스
@@ -17,6 +23,11 @@ public class Dialogue //다이얼로그 요소 정보를 담은 클래스
 
     //public bool panel_Name; //이름 텍스트 패널
     public Image panel_dialogue; //다이얼로그 텍스트 패널
+    public Sprite dl_background;
+
+    public Sprite cutScene;
+
+    public bool fade;
 
     //public bool middle;
 
@@ -26,13 +37,21 @@ public class Dialogue //다이얼로그 요소 정보를 담은 클래스
 public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 클래스
 {
     public static DialogueManager instance;
+
+    [SerializeField] GameObject visible; 
+
     [SerializeField] Image sprite_L; //왼쪽 캐릭터 스프라이트
     [SerializeField] Image sprite_R; //오른쪽 캐릭터 스프라이트 
 
     [SerializeField] Text txt_name; //이름 텍스트
-    //[SerializeField] Image namepanel;
-    //이름 텍스트 패널 (나레이션 텍스트 출력 때에는 SetActive False)
+    //[SerializeField] Image namepanel; //이름 텍스트 패널
     [SerializeField] Text txt_dialogue; //대화 내용 텍스트
+
+    [SerializeField] Image background; //배경
+
+    [SerializeField] Image cutscene; //컷신
+
+    [SerializeField] CanvasRenderer canvasRenderer;
 
     [SerializeField] float txt_speed;
 
@@ -40,18 +59,15 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
 
     
 
-    //bool isDialogue = false;
+
+    public bool istyping;
+
+    string currentText;
+
+    
     int count; //다이얼로그 순서 
 
-    //다이얼로그 창 활성화를 위한 함수... 이지만 다이얼로그 씬을 분리할거라면 필요없다고 생각...
-    /*void ONOFF(bool _flag) 
-    {
-        sprite_L.gameObject.SetActive(_flag);
-        sprite_R.gameObject.SetActive(_flag);
-        txt_dialogue.gameObject.SetActive(_flag);
-        txt_dialogue.gameObject.SetActive(_flag);
-        isDialogue = _flag;
-    }*/
+    
 
 
     private void Awake() //싱글톤 사용해서 어디서든 start 함수를 쓸 수 있게
@@ -61,32 +77,84 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
         else if (instance != this) Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        visible.SetActive(false);
     }
 
 
 
     public void start_dialogue() //다이얼로그를 시작하는 함수
     {
-        //isDialogue = true;
+        
         count = 0;
         next_dialogue();
+
+        visible.SetActive(true);
 
     }
 
     public void next_dialogue() //다음 다이얼로그로 넘어가는 함수
     {
-        string txt_change = dialogues[count].dialogue;
+        //원하는 부분에서 1초동안 딜레이 후 SetActive(false), 1초 동안 딜레이 후 SetActive(true)
+        //원하는 부분에서 StartCoroutine(Fade()); 실행
+
+        //원하는 부분에서 SetActive(false) 멈췄다가  cutsceneAnimator 실행이 끝난 뒤 다음 다이얼로그로 넘어가기
 
 
+        if (istyping)
+        {
+            StopAllCoroutines();
+            txt_dialogue.text = currentText;
+            istyping = false;
+        }
+        
+        else if (!istyping && count < dialogues.Length)
+        {
+            string txt_change = dialogues[count].dialogue;
 
-        //다음 배열로
-        txt_name.text = dialogues[count].name;
-        txt_dialogue.text = dialogues[count].dialogue;
-        sprite_L.sprite = dialogues[count].img_L;
-        sprite_R.sprite = dialogues[count].img_R;
-        count++;
+            //다음 배열로
+            txt_name.text = dialogues[count].name;
+            txt_dialogue.text = dialogues[count].dialogue;
+            sprite_L.sprite = dialogues[count].img_L;
+            sprite_R.sprite = dialogues[count].img_R;
+            background.sprite = dialogues[count].dl_background;
+            cutscene.sprite = dialogues[count].cutScene;
 
-        StartCoroutine(Typing(txt_change));
+            if (dialogues[count].img_L == null)
+            {
+                sprite_L.gameObject.SetActive(false);
+            }
+            else
+            {
+                sprite_L.gameObject.SetActive(true);
+            }
+
+            if (dialogues[count].img_R == null)
+            {
+                sprite_R.gameObject.SetActive(false);
+            }
+            else
+            {
+                sprite_R.gameObject.SetActive(true);
+            }
+
+            if (dialogues[count].cutScene == null)
+            {
+                cutscene.gameObject.SetActive(false);
+            }
+            else
+            {
+                cutscene.gameObject.SetActive(true);
+            }
+
+            count++;
+
+            StartCoroutine(Typing(txt_change));
+        }
+        else
+        {
+            visible.SetActive(false);
+        }
     }
 
 
@@ -95,6 +163,7 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
     // Start is called before the first frame update
     void Start()
     {
+        
         start_dialogue();
     }
 
@@ -104,22 +173,54 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
         
         if (Input.GetMouseButtonDown(0))
         {
-            if (count < dialogues.Length) next_dialogue();
-            //else isDialogue = false;
-        }
-        //++텍스트가 전부 재생되기 전에 누르면 넘어가지 않음
+            if (istyping)
+            {
+                StopAllCoroutines();
+                txt_dialogue.text = currentText;
+                istyping = false;
+            }
+            else
+            {
 
-        /*if (isDialogue)
-        {
+                if (dialogues[count].fade == true)//fade가 체크되어 있으면 클릭을 눌렀을 때 페이드 아웃 실행
+                {
+                    FadeInOut.instance.Transition(); //페이드 인 아웃하는 코루틴
+                    StartCoroutine(dl_Transition()); //다이얼로그를 멈췄다가 실행하는 코루틴
+                    //코루틴 실행중에는 클릭이 작동하지 않도록
+                }
+                else
+                {
+                    next_dialogue();
+                }
+                
+            }
             
             
-        }*/
+
+            
+        }
+        
+    }
+
+
+    
+
+    IEnumerator dl_Transition()
+    {
+        yield return new WaitForSeconds(1);
+        visible.SetActive(false);
+
+        yield return new WaitForSeconds(2);
+        visible.SetActive(true);
+
+        next_dialogue();
     }
 
 
     IEnumerator Typing(string text)
     {
         txt_dialogue.text = string.Empty;
+        currentText = text;
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -129,10 +230,11 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
             txt_dialogue.text = stringBuilder.ToString();
 
             yield return new WaitForSeconds(txt_speed);
+            istyping = true;
         }
+        istyping = false;
     }
 
-    //텍스트가 한 글자씩 출력되는 애니메이션
-    //IEnumerator typing(string text)
+    
 
 }
