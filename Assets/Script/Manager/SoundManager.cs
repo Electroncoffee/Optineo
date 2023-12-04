@@ -55,6 +55,7 @@ public class SoundManager : MonoBehaviour
             audioSource.pitch = pitch;
             audioSource.clip = audioClip;
             audioSource.Play();
+            
         }
         else // Effect 효과음 재생
         {

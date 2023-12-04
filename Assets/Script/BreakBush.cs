@@ -9,13 +9,24 @@ public class BreakBush : MonoBehaviour, icall
     public HpManager hp;
     public ObjectLayerManager LayerManager;
     public SceneSoundManager soundManager;
-    public AudioClip clip;
+    private AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     public void call(Vector3 pos)
     {
-        soundManager.Play(clip);
+        audioSource.Play();
         hp.damage(damage);
         playerScript.flag_isActing(true,0.1f);
         LayerManager.RemoveObject(this.gameObject);
+        
         Destroy(this.gameObject);
+        
     }
+
+
+
+
 }

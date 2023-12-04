@@ -33,15 +33,18 @@ public class PlayerMove : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();//
         size = new Vector2(63 / 64, 63 / 64);
+
     }
     void Update() //너무 길고 네스트도 커져서 조금 분할할 필요가 있어보임
     {
+
         if (isStop && isActing)
         {
             foreach (KeyValuePair<KeyCode, Vector3> item in Move_Key)//이동키가 눌렸는지 전부 확인
             {
                 if (Input.GetKey(item.Key)) //눌리면
                 {
+
                     col = Physics2D.OverlapBox(transform.position + item.Value, size, 0, LayerMask.GetMask("Block","Object","Field","Item"));
                     if (col == null) // 이동방향에 아무것도 없음
                     {
@@ -63,9 +66,10 @@ public class PlayerMove : MonoBehaviour
                             case "Object":
                                 isActing = false;
                                 col.GetComponent<icall>().call(item.Value);
-                                audioSource.Play();
                                 flip_x(item.Key);
+                                isActing = true;
                                 return;
+
                             case "Field":
                             case "Item":
                                 anim.Play("Dash_3");
@@ -90,7 +94,7 @@ public class PlayerMove : MonoBehaviour
             isStop = true;
     }
 
-    public void flip_x(KeyCode Key)
+    public void flip_x(KeyCode Key) //플레이어 캐릭터의 스프라이트를 뒤집기
     {
         if (Key == KeyCode.LeftArrow)//수평이동 flip처리
             spriteRenderer.flipX = false;

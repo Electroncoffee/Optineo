@@ -348,6 +348,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 8214157100881908866, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8214157100881908868, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -890,6 +894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Break Bush (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6556880954906684591, guid: 30a05bc465a5e564ea6cc499b48579b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30a05bc465a5e564ea6cc499b48579b3, type: 3}
 --- !u!1001 &355116638
@@ -1120,6 +1128,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Break Bush
       objectReference: {fileID: 0}
+    - target: {fileID: 6556880954906684591, guid: 30a05bc465a5e564ea6cc499b48579b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30a05bc465a5e564ea6cc499b48579b3, type: 3}
 --- !u!4 &429434456 stripped
@@ -1180,6 +1192,10 @@ PrefabInstance:
     - target: {fileID: 8214157100881908866, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
       propertyPath: m_Name
       value: Statue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214157100881908866, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8214157100881908868, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
       propertyPath: m_RootOrder
@@ -2761,6 +2777,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8214157100881908866, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8214157100881908868, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3181,6 +3201,10 @@ PrefabInstance:
     - target: {fileID: 8214157100881908866, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
       propertyPath: m_Name
       value: Statue (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214157100881908866, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8214157100881908868, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
       propertyPath: m_RootOrder
@@ -3661,6 +3685,10 @@ PrefabInstance:
     - target: {fileID: 8214157100881908866, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
       propertyPath: m_Name
       value: Statue (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214157100881908866, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8214157100881908868, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
       propertyPath: m_RootOrder
@@ -4489,6 +4517,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 41872263645780041, guid: afb8885d45586b24bb9a22670141a7cc, type: 3}
+      propertyPath: m_Text
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 41872263709640710, guid: afb8885d45586b24bb9a22670141a7cc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4635,7 +4667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 41872265140936508, guid: afb8885d45586b24bb9a22670141a7cc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0009765625
+      value: 0.0008239746
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 41872265140936510, guid: afb8885d45586b24bb9a22670141a7cc, type: 3}

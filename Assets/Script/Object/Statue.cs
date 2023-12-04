@@ -14,13 +14,14 @@ public class Statue : MonoBehaviour, icall
     private float shakeAmount = 0.2f; // 흔들림의 강도
     private float shakeDuration = 0.1f; // 흔들림 지속 시간
     private Vector3 initialPosition; //쉐이킹 좌표
-    public AudioClip clip;
+    private AudioSource audioSource;
     public SceneSoundManager soundManager;
     public PlayerMove playerScript;
     public HpManager hpManager;
     private void Awake()
     {
         size = new Vector2(63 / 64, 63 / 64);
+        audioSource = GetComponent<AudioSource>();
     }
     private void FixedUpdate()
     {
@@ -36,14 +37,19 @@ public class Statue : MonoBehaviour, icall
 
 
     }
+
+
     public void call(Vector3 pos)
     {
         col = Physics2D.OverlapBox(transform.position + pos, size, 0, LayerMask.GetMask("Block", "Object"));
-        soundManager.Play(clip);
+        audioSource.Play();
         hpManager.damage(1);
         if (col == null) // 이동방향에 아무것도 없음
         {
             target_pos = transform.position + (pos * moveDistance);
+
+            transform.position = target_pos;
+
             Move = true;
         }
         else
