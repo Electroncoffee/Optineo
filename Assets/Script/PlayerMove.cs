@@ -67,10 +67,18 @@ public class PlayerMove : MonoBehaviour
                                 isActing = false;
                                 col.GetComponent<icall>().call(item.Value);
                                 flip_x(item.Key);
-                                isActing = true;
                                 return;
 
                             case "Field":
+                            //필드에 따른 에니메이션 재생
+                            audioSource.Play();
+                            isStop = false; //움직이게
+                            Player_Start_Pos = transform.position; //좌표저장(시작지점)
+                            target_pos = Player_Start_Pos + (item.Value * moveDistance); //좌표저장(끝지점)
+                            col.GetComponent<icall>().call(item.Value);
+                            flip_x(item.Key);
+                            return;
+
                             case "Item":
                                 anim.Play("Dash_3");
                                 audioSource.Play();

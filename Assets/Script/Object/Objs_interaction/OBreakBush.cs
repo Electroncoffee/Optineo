@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakBush : MonoBehaviour, icall
+public class OBreakBush : MonoBehaviour, icall
 {
     public int damage;
     public PlayerMove playerScript;

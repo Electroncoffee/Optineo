@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Statue : MonoBehaviour, icall
+public class OPush_indestructible_Obj : MonoBehaviour, icall
 {
     public float moveSpeed; // 이동 속도
     public float moveDistance; // 이동 거리
@@ -49,6 +49,8 @@ public class Statue : MonoBehaviour, icall
             target_pos = transform.position + (pos * moveDistance);
 
             transform.position = target_pos;
+
+            playerScript.flag_isActing(true,1.0f);
 
             Move = true;
         }
