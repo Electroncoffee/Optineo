@@ -77,6 +77,7 @@ public class PlayerMove : MonoBehaviour
                             Player_Start_Pos = transform.position; //좌표저장(시작지점)
                             target_pos = Player_Start_Pos + (item.Value * moveDistance); //좌표저장(끝지점)
                             col.GetComponent<icall>().call(item.Value);
+                            hpManager.damage(1);
                             flip_x(item.Key);
                             return;
 

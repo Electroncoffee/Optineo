@@ -31,16 +31,17 @@ public class Break_Wine : MonoBehaviour, icall
                 //플레이어블 캐릭터의 넘어지는 모션 추가
                 //플레이어블 캐릭터의 넘어지는 사운드 추가
                 
-                if(playerScript.transform.position.Equals(End_pos))
-                {
-                    Debug.Log("Disable");
-                    hp.damage(damage); //체력 감소
-                    isActive = false;
-                    playerScript.flag_isActing(true, 1.0f);
-                }
+                
                 
             }
 
+            if(playerScript.transform.position == End_pos)
+            {
+                Debug.Log("Disable");
+                hp.damage(damage); //체력 감소
+                isActive = false;
+                playerScript.flag_isActing(true, 1.0f);
+            }
 
            
         }
