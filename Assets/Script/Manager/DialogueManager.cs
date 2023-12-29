@@ -156,21 +156,15 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
             visible.SetActive(false);
         }
     }
-
-
-
-
     // Start is called before the first frame update
     void Start()
     {
-        
         start_dialogue();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         if (Input.GetMouseButtonDown(0))
         {
             if (istyping)
@@ -181,7 +175,6 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
             }
             else
             {
-
                 if (dialogues[count].fade == true)//fade가 체크되어 있으면 클릭을 눌렀을 때 페이드 아웃 실행
                 {
                     FadeInOut.instance.Transition(); //페이드 인 아웃하는 코루틴
@@ -192,19 +185,9 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
                 {
                     next_dialogue();
                 }
-                
             }
-            
-            
-
-            
         }
-        
     }
-
-
-    
-
     IEnumerator dl_Transition()
     {
         yield return new WaitForSeconds(1);
@@ -215,8 +198,6 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
 
         next_dialogue();
     }
-
-
     IEnumerator Typing(string text)
     {
         txt_dialogue.text = string.Empty;
@@ -234,7 +215,4 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
         }
         istyping = false;
     }
-
-    
-
 }

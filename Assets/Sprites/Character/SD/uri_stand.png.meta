@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 9e4ae33c0ea7511429e3555dfefff9ae
+guid: 18ecefd6999ca1540a9ee42b57f2c965
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2147685559727469259
-    second: Stand_0
+      213: 1269768884796149661
+    second: uri_stand_0
   - first:
-      213: 1531825654891787424
-    second: Stand_1
+      213: -7444784403967587912
+    second: uri_stand_1
   - first:
-      213: -6642458161248216228
-    second: Stand_2
+      213: -3479043971878431334
+    second: uri_stand_2
   - first:
-      213: 3305897227715394346
-    second: Stand_3
+      213: -612030896988038214
+    second: uri_stand_3
   - first:
-      213: 5263309427929411793
-    second: Stand_4
+      213: 4074077113834336359
+    second: uri_stand_4
   - first:
-      213: -4141160084700575911
-    second: Stand_5
+      213: -9097606055873270121
+    second: uri_stand_5
   - first:
-      213: 2691420761349267047
-    second: Stand_6
+      213: -8994496389985905481
+    second: uri_stand_6
   - first:
-      213: -6276740653648743391
-    second: Stand_7
+      213: -8192349932509773144
+    second: uri_stand_7
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -70,7 +70,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 704
+  spritePixelsToUnits: 832
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,169 +116,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Stand_0
+      name: uri_stand_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 704
-        height: 1273
-      alignment: 9
-      pivot: {x: 0.5234375, y: 0.1230165}
+        x: 340
+        y: 256
+        width: 804
+        height: 924
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc2bacc33ac1ecd10800000000000000
-      internalID: 2147685559727469259
+      spriteID: d9f4e1db2102f9110800000000000000
+      internalID: 1269768884796149661
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stand_1
+      name: uri_stand_1
       rect:
         serializedVersion: 2
-        x: 704
-        y: 0
-        width: 704
-        height: 1273
-      alignment: 9
-      pivot: {x: 0.5234375, y: 0.1230165}
+        x: 1308
+        y: 256
+        width: 808
+        height: 920
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a4b7a13153224510800000000000000
-      internalID: 1531825654891787424
+      spriteID: 8b9c42c5700dea890800000000000000
+      internalID: -7444784403967587912
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stand_2
+      name: uri_stand_2
       rect:
         serializedVersion: 2
-        x: 1408
-        y: 0
-        width: 704
-        height: 1273
-      alignment: 9
-      pivot: {x: 0.5234375, y: 0.1230165}
+        x: 2276
+        y: 256
+        width: 804
+        height: 924
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5bd76fde7f31d3a0800000000000000
-      internalID: -6642458161248216228
+      spriteID: a95d83ab0f3f7bfc0800000000000000
+      internalID: -3479043971878431334
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stand_3
+      name: uri_stand_3
       rect:
         serializedVersion: 2
-        x: 2112
-        y: 0
-        width: 704
-        height: 1273
-      alignment: 9
-      pivot: {x: 0.5234375, y: 0.1230165}
+        x: 3228
+        y: 256
+        width: 808
+        height: 920
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2bbce16308e0ed20800000000000000
-      internalID: 3305897227715394346
+      spriteID: abbd6715421a187f0800000000000000
+      internalID: -612030896988038214
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stand_4
+      name: uri_stand_4
       rect:
         serializedVersion: 2
-        x: 2816
-        y: 0
-        width: 704
-        height: 1273
-      alignment: 9
-      pivot: {x: 0.5234375, y: 0.1230165}
+        x: 4180
+        y: 256
+        width: 804
+        height: 924
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d072bad9080b0940800000000000000
-      internalID: 5263309427929411793
+      spriteID: 760f4a5bc870a8830800000000000000
+      internalID: 4074077113834336359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stand_5
+      name: uri_stand_5
       rect:
         serializedVersion: 2
-        x: 3520
-        y: 0
-        width: 704
-        height: 1273
-      alignment: 9
-      pivot: {x: 0.5234375, y: 0.1230165}
+        x: 5136
+        y: 256
+        width: 800
+        height: 916
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 957456108d4a786c0800000000000000
-      internalID: -4141160084700575911
+      spriteID: 79e2b3d4e7fceb180800000000000000
+      internalID: -9097606055873270121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stand_6
+      name: uri_stand_6
       rect:
         serializedVersion: 2
-        x: 4224
-        y: 0
-        width: 704
-        height: 1273
-      alignment: 9
-      pivot: {x: 0.5234375, y: 0.1230165}
+        x: 6092
+        y: 256
+        width: 800
+        height: 908
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76e95553ce8d95520800000000000000
-      internalID: 2691420761349267047
+      spriteID: 7b45b5d20312d2380800000000000000
+      internalID: -8994496389985905481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stand_7
+      name: uri_stand_7
       rect:
         serializedVersion: 2
-        x: 4923
-        y: 0
-        width: 704
-        height: 1273
-      alignment: 9
-      pivot: {x: 0.5234375, y: 0.1230165}
+        x: 7056
+        y: 256
+        width: 800
+        height: 916
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 124730091a984e8a0800000000000000
-      internalID: -6276740653648743391
+      spriteID: 8a24f0d242dee4e80800000000000000
+      internalID: -8192349932509773144
       vertices: []
       indices: 
       edges: []

@@ -4,9 +4,8 @@ using System.Xml;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 /*
-  스테이지 전환 시 필요한 정보들 반환하기
+  모든씬에 걸쳐 사용될 기능들
 */
-
 public class SettingManager : MonoBehaviour
 {
     private void Awake()
@@ -20,5 +19,15 @@ public class SettingManager : MonoBehaviour
     public void LoadScene(string SceneName)
     {
         SceneManager.LoadScene(SceneName);
+    }
+
+    //게임종료
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
