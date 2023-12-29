@@ -9,8 +9,9 @@ public enum Sound
 }
 public class SoundManager : MonoBehaviour
 {
-    AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
+    public AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+    
     public void Awake()
     {
         GameObject root = GameObject.Find("@Sound");

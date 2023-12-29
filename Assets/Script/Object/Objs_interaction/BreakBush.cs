@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OBreakBush : MonoBehaviour, icall
+public class BreakBush : MonoBehaviour, icall
 {
     public int damage;
     public PlayerMove playerScript;
@@ -19,10 +19,10 @@ public class OBreakBush : MonoBehaviour, icall
     {
         audioSource.Play();
         hp.damage(damage);
-        playerScript.flag_isActing(true,0.1f);
+        playerScript.flag_isActing(true,1.2f);
         LayerManager.RemoveObject(this.gameObject);
         
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, audioSource.clip.length);
         
     }
 

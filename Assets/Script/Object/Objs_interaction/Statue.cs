@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OPush_indestructible_Obj : MonoBehaviour, icall
+public class Statue : MonoBehaviour, icall
 {
     public float moveSpeed; // 이동 속도
     public float moveDistance; // 이동 거리
     private bool Move = false; // 정지 여부
     private Vector3 target_pos; //이동할 좌표
+    private Vector2 velocity = Vector3.zero; //smoothdamp 에서 사용할 변수
     private Vector2 size;
     private Collider2D col;
     private float shakeAmount = 0.2f; // 흔들림의 강도
@@ -18,6 +19,8 @@ public class OPush_indestructible_Obj : MonoBehaviour, icall
     public SceneSoundManager soundManager;
     public PlayerMove playerScript;
     public HpManager hpManager;
+
+    
     private void Awake()
     {
         size = new Vector2(63 / 64, 63 / 64);
@@ -27,7 +30,7 @@ public class OPush_indestructible_Obj : MonoBehaviour, icall
     {
         if (Move) //움직이면
         {
-            transform.position = Vector3.MoveTowards(transform.position, target_pos, Time.deltaTime * moveSpeed);
+            transform.position = Vector2.SmoothDamp(transform.position, target_pos, ref velocity, Time.deltaTime * moveSpeed);
             if (transform.position.Equals(target_pos))
             {
                 playerScript.flag_isActing(true);
@@ -48,9 +51,7 @@ public class OPush_indestructible_Obj : MonoBehaviour, icall
         {
             target_pos = transform.position + (pos * moveDistance);
 
-            transform.position = target_pos;
-
-            playerScript.flag_isActing(true,1.0f);
+            playerScript.flag_isActing(true, 1.0f);
 
             Move = true;
         }

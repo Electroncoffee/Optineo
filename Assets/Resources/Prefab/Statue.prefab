@@ -123,9 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa660d0652ec3243ba4211cf5d63f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 5
   moveDistance: 1
-  audioSource: {fileID: 0}
   soundManager: {fileID: 2022462685834858551, guid: 1c8b67224e0e4f647b9583fcefd65a1a, type: 3}
   playerScript: {fileID: 0}
   hpManager: {fileID: 0}

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6556880954906684590}
   - component: {fileID: 6556880954906684578}
   - component: {fileID: 6556880954906684579}
-  - component: {fileID: 6556880954906684577}
   - component: {fileID: -5076645422991307722}
+  - component: {fileID: 6556880954906684577}
   m_Layer: 8
   m_Name: Break Bush
   m_TagString: Untagged
@@ -111,6 +111,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-5076645422991307722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556880954906684591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93b8396c01555340b11e43036a41067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  playerScript: {fileID: 0}
+  hp: {fileID: 0}
+  LayerManager: {fileID: 0}
+  soundManager: {fileID: 0}
 --- !u!82 &6556880954906684577
 AudioSource:
   m_ObjectHideFlags: 0
@@ -207,20 +224,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-5076645422991307722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6556880954906684591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f93b8396c01555340b11e43036a41067, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  playerScript: {fileID: 0}
-  hp: {fileID: 0}
-  LayerManager: {fileID: 0}
-  soundManager: {fileID: 0}

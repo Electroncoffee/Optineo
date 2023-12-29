@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -101,6 +102,8 @@ public class PlayerMove : MonoBehaviour
         if (transform.position.Equals(target_pos))
             isStop = true;
     }
+
+
 
     public void flip_x(KeyCode Key) //플레이어 캐릭터의 스프라이트를 뒤집기
     {

@@ -124,7 +124,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   moveSpeed: 7
-  moveDistance: 1
   playerScript: {fileID: 0}
   hp: {fileID: 0}
   LayerManager: {fileID: 0}
