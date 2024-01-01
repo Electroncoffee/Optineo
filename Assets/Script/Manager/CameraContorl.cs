@@ -13,6 +13,10 @@ public class CameraContorl : MonoBehaviour
 
     public float Max_Size;
     public float Min_Size;
+    Vector3 target_pos;
+
+    private float target_x;
+    private float target_y;
 
 
     
@@ -33,19 +37,65 @@ public class CameraContorl : MonoBehaviour
         cameraTransform = GetComponent<Transform>();
         Max_Size = camera.orthographicSize; //최대 카메라 거리
         Min_Size = 3f; //최소 카메라 거리
-        BasePos = new Vector3(3.5f, 9.2f, -10f);
+        //BasePos = new Vector3(3.5f, 9.2f, -10f);
+
+        /*
+        Map1 -> CameraPos = 7, 6.5 -> 9, 4.9
+        Map2 -> CameraPos = 8, 2 -> 5.71, 2
+
+
+
+        */
+
+        float camera_x = transform.position.x * 0.5f;
+        float camera_y = transform.position.y * 1.4f;
+
+        //BasePos = new Vector3(camera_x, camera_y, -10f);
+
+        BasePos = transform.position;
     }
 
 
 
     void Update()
     {
-        // Lerp 혹은 Smoothdamp를 통해 플레이어의 조작에 따라 움직이는 기능.
-        // 이 때 플레이어블 캐릭터의 움직임을 제한해야됨. 같은 조작을 통해 움직일 것이기 때문
+        
+        /*
+        if(!playerScript.isStop && camera.orthographicSize != Max_Size)
+        {
+            if(Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                target_x = transform.position.x;
+                target_y = transform.position.y + 1;
+                target_pos = new Vector3(target_x, target_y, -10);
+                transform.position = Vector3.MoveTowards(transform.position, target_pos, 0.1f);
+            }
+            
+            if(Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                target_x = transform.position.x;
+                target_y = transform.position.y - 1;
+                target_pos = new Vector3(target_x, target_y, -10);
+                transform.position = Vector3.MoveTowards(transform.position, target_pos, 0.1f);
+            }
 
-        // 카메라의 확대, 축소 기능
-        // 최대 확대 거리와 최소 축소 거리를 정해야함. 이는 맵 전체를 볼 수 있어야 하며, 픽셀이 깨지지 않을 수준까지 확대 가능해야함
-        // 우선 확대 축소의 기능부터 구현해보자
+            if(Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                target_x = transform.position.x - 1;
+                target_y = transform.position.y;
+                target_pos = new Vector3(target_x, target_y, -10);
+                transform.position = Vector3.MoveTowards(transform.position, target_pos, 0.1f);
+            }
+
+            if(Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                target_x = transform.position.x + 1;
+                target_y = transform.position.y;
+                target_pos = new Vector3(target_x, target_y, -10);
+                transform.position = Vector3.MoveTowards(transform.position, target_pos, 0.1f);
+            }
+        }
+        */
 
 
 
@@ -81,9 +131,7 @@ public class CameraContorl : MonoBehaviour
         }
         
 
-        int temp = 0;
-        if(sign){temp--;} //줌아웃
-        else {temp--;} //줌인
+        int temp = -1;
 
         Vector3 playerPos = playerScript.transform.position;
 
