@@ -11,6 +11,10 @@ public class SoundManager : MonoBehaviour
 {
     public AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+
+    
+
+
     
     public void Awake()
     {
@@ -29,6 +33,8 @@ public class SoundManager : MonoBehaviour
             }
 
             _audioSources[(int)Sound.Bgm].loop = true; // bgm 재생기는 무한 반복 재생
+
+            
         }
     }
     public void Clear()

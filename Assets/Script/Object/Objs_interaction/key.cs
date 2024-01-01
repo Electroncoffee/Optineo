@@ -8,21 +8,17 @@ public class key : MonoBehaviour, icall
     public HpManager hp;
     public ObjectLayerManager LayerManager;
     public SceneSoundManager soundManager;
-    private AudioSource audioSource;
+    public AudioClip clip;
     public GameObject key_effect;
     bool flag = true;
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
 
-    }
     public void call(Vector3 pos)
     {
         if (flag)
         {
             flag = false;
             hp.damage(1);
-            audioSource.Play();
+            soundManager.Play(clip);
             key_effect.SetActive(true);
             item.has_key = true;
 
