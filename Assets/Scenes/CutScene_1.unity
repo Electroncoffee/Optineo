@@ -643,6 +643,14 @@ MonoBehaviour:
   txt_speed: 0.05
   dialogues:
   - name: 
+    dialogue: 
+    img_L: {fileID: 0}
+    img_R: {fileID: 0}
+    panel_dialogue: {fileID: 0}
+    dl_background: {fileID: 0}
+    cutScene: {fileID: 0}
+    fade: 0
+  - name: 
     dialogue: "\uBCF8\uACA9\uC801\uC73C\uB85C \uC774\uC57C\uAE30\uB97C \uC2DC\uC791\uD558\uAE30
       \uC804, \uC2DC\uAC04\uC740 n\uB144 \uC804\uC73C\uB85C \uD758\uB7EC\uAC04\uB2E4."
     img_L: {fileID: 0}

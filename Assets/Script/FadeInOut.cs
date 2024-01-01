@@ -41,7 +41,7 @@ public class FadeInOut : MonoBehaviour
 
     IEnumerator Fade()
     {
-        for (float i =0; i <= 1; i += Time.deltaTime / 1)
+        for (float i = 0; i <= 1; i += Time.deltaTime / 1)
         {
             canvasRenderer.SetAlpha(i);
             yield return null;

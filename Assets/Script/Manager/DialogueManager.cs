@@ -67,7 +67,7 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
     
     int count; //다이얼로그 순서 
 
-    
+    bool isInputblock = false;
 
 
     private void Awake() //싱글톤 사용해서 어디서든 start 함수를 쓸 수 있게
@@ -157,8 +157,7 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
         }
     }
 
-
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -170,30 +169,42 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (istyping)
-            {
-                StopAllCoroutines();
-                txt_dialogue.text = currentText;
-                istyping = false;
-            }
-            else
-            {
 
-                if (dialogues[count].fade == true)//fade가 체크되어 있으면 클릭을 눌렀을 때 페이드 아웃 실행
+        if (!isInputblock)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (istyping)
                 {
-                    FadeInOut.instance.Transition(); //페이드 인 아웃하는 코루틴
-                    StartCoroutine(dl_Transition()); //다이얼로그를 멈췄다가 실행하는 코루틴
-                    //코루틴 실행중에는 클릭이 작동하지 않도록
+                    StopAllCoroutines();
+                    txt_dialogue.text = currentText;
+                    istyping = false;
                 }
                 else
                 {
-                    next_dialogue();
+                    if (count < dialogues.Length)
+                    {
+                        if (dialogues[count].fade)//fade가 체크되어 있으면 클릭을 눌렀을 때 페이드 아웃 실행
+                        {
+                            FadeInOut.instance.Transition(); //페이드 인 아웃하는 코루틴
+                            StartCoroutine(dl_Transition()); //다이얼로그를 멈췄다가 실행하는 코루틴
+
+                            StartCoroutine(KeyBlock(4f));
+                            //코루틴 실행중에는 클릭이 작동하지 않도록
+                        }
+                        else
+                        {
+                            next_dialogue();
+                        }
+                    }
+
+
+
                 }
-                
             }
+
+        
+        
             
             
 
@@ -207,10 +218,10 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
 
     IEnumerator dl_Transition()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
         visible.SetActive(false);
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2.5f);
         visible.SetActive(true);
 
         next_dialogue();
@@ -236,5 +247,10 @@ public class DialogueManager : MonoBehaviour //다이얼로그 출력을 위한 
     }
 
     
-
+    IEnumerator KeyBlock(float seconds)
+    {
+        isInputblock = true;
+        yield return new WaitForSeconds(seconds);
+        isInputblock = false;
+    }
 }

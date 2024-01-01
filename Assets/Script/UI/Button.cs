@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
+
+    Button bt;
+
     // Start is called before the first frame update
     void Start()
     {
+        
+        
         
     }
 
@@ -15,4 +20,6 @@ public class Button : MonoBehaviour
     {
         
     }
+
+
 }
