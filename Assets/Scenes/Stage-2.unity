@@ -2955,6 +2955,8 @@ MonoBehaviour:
   playerScript: {fileID: 24863349}
   Max_Size: 0
   Min_Size: 0
+  smoothTime: 1
+  isControl: 0
 --- !u!1001 &1839607248
 PrefabInstance:
   m_ObjectHideFlags: 0
