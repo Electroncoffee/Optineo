@@ -4669,6 +4669,12 @@ MonoBehaviour:
   playerScript: {fileID: 1915339591}
   Max_Size: 0
   Min_Size: 0
+  smoothTime: 20
+  min_tile_x: 0
+  max_tile_x: 0
+  isActive: 1
+  isControl: 0
+  isTracking: 0
 --- !u!4 &2046070459 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8214157100881908868, guid: bf9439ac46bf01c4eb0c206739927a4d, type: 3}
