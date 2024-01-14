@@ -1,14 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class CameraControl : MonoBehaviour
 {
 
     public PlayerMove playerScript;
-    private Camera camera;
-    private float camera_size;
+    private Camera camerainfo;
+    private float target_size;
     private Vector3 BasePos; //원래 상태로 복귀하기 위한 벡터
     Transform cameraTransform;
 
@@ -16,33 +14,39 @@ public class CameraControl : MonoBehaviour
     public float Max_Size;
     public float Min_Size;
     public float smoothTime;
+    public float zoomspeed; //확대, 축소되며 화면이 이동하는 속도를 조절. 너무 부족할 경우 목표 위치에 도달하지 못할 수 있음
     public float min_tile_x; //맵 최소 x 좌표
     public float max_tile_x; //맵 최대 x 좌표
+    public float min_tile_y; //맵 최소 y 좌표
+    public float max_tile_y; //맵 최대 y 좌표
     private Vector3 velocity = Vector3.zero;
+    private float temp;
 
     public bool isActive = true;
     public bool isControl = false;
     public bool isTracking = false;
+    public bool isZoom = false;
+    public bool isZoomIn = false;
 
-    Vector3 up_pos = new Vector3(0, 3, 0);
-    Vector3 down_pos = new Vector3(0, -3, 0);
-    Vector3 left_pos = new Vector3(-3, 0, 0);
-    Vector3 right_pos = new Vector3(3, 0, 0);
+    Vector3 up_pos = new Vector3(0, 0.1f, 0);
+    Vector3 down_pos = new Vector3(0, -0.1f, 0);
+    Vector3 left_pos = new Vector3(-0.1f, 0, 0);
+    Vector3 right_pos = new Vector3(0.1f, 0, 0);
     Vector3 target_pos;
+    Vector3 temppos; //카메라 무빙 이전의 좌표를 기억하기 위한 변수
 
 
 
 
     void Awake()
     {
-        camera = GetComponent<Camera>();
+        camerainfo = GetComponent<Camera>();
         cameraTransform = GetComponent<Transform>();
-        camera_size = camera.orthographicSize;
-        Max_Size = camera.orthographicSize; //최대 카메라 거리
+        Max_Size = camerainfo.orthographicSize; //최대 카메라 거리
         Min_Size = 3f; //최소 카메라 거리
 
         BasePos = transform.position;
-        target_pos = BasePos;
+        target_pos = transform.position;
 
 
 
@@ -67,53 +71,34 @@ public class CameraControl : MonoBehaviour
 
     void ControlCamera() //카메라를 상하좌우로 움직이는 기능
     {
-        if(Input.GetKey(KeyCode.LeftControl))
+        if(Input.GetKey(KeyCode.LeftControl) && !isZoom)
         {
-            isControl = true;
+            if(!isControl)
+            {
+                temppos = transform.position; //카메라 무빙 시작 지점 저장
+                isControl = true;
+            }
             playerScript.isActing = false;
             if(!playerScript.isActing && isControl)
             {
-                if(Input.GetKeyDown(KeyCode.UpArrow))
+                if(Input.GetKey(KeyCode.UpArrow))
                 {
-                    //Debug.Log("UP");
                     target_pos += up_pos;
                 }
-                else if(Input.GetKeyUp(KeyCode.UpArrow))
-                {
-                    target_pos -= up_pos;
-                }
 
-
-                if(Input.GetKeyDown(KeyCode.DownArrow))
+                if(Input.GetKey(KeyCode.DownArrow))
                 {
-                    //Debug.Log("UP");
                     target_pos += down_pos;
                 }
-                else if(Input.GetKeyUp(KeyCode.DownArrow))
-                {
-                    target_pos -= down_pos;
-                }
 
-
-                if(Input.GetKeyDown(KeyCode.LeftArrow))
+                if(Input.GetKey(KeyCode.LeftArrow))
                 {
-                    //Debug.Log("UP");
                     target_pos += left_pos;
                 }
-                else if(Input.GetKeyUp(KeyCode.LeftArrow))
-                {
-                    target_pos -= left_pos;
-                }
 
-
-                if(Input.GetKeyDown(KeyCode.RightArrow))
+                if(Input.GetKey(KeyCode.RightArrow))
                 {
-                    //Debug.Log("UP");
                     target_pos += right_pos;
-                }
-                else if(Input.GetKeyUp(KeyCode.RightArrow))
-                {
-                    target_pos -= right_pos;
                 }
                 
 
@@ -124,12 +109,10 @@ public class CameraControl : MonoBehaviour
                 
             }
         }
-        else if(Input.GetKeyUp(KeyCode.LeftControl))
+        else if(Input.GetKeyUp(KeyCode.LeftControl) && isControl)
         {
-            isControl = false;
-            playerScript.flag_isActing(true, 1.0f);
-
-            transform.position = BasePos;
+            isActive = false;
+            StartCoroutine(TrasnPos(temppos));
         }
         
     }
@@ -137,17 +120,56 @@ public class CameraControl : MonoBehaviour
 
     void TrackingPlayer() //플레이어를 추적하는 기능
     {
-        if(playerScript.transform.position.x <= min_tile_x + 5) //트래킹 활성화
+
+        //조건 1 Zoom Out 상태에서도 카메라의 중앙을 넘어설 경우 캐릭터를 추적
+        //조건 1-1 Zoom Out 상태일 경우 맵의 최소 거리와 최대 거리에 대한 정지 위치가 다름 (씬2와 같은 경우 카메라가 움직이지 않음)
+        //조건 1-2 즉 카메라 Zoom Out 상태인 경우 카메라가 중앙을 넘는 경우에도 minTile+maxtile > 30 이 아닌 경우 추적 X
+        //조건 2 Zoom In 상태일 경우 카메라의 중앙을 넘어설 경우 캐릭터를 추적
+
+        //조건 3 카메라는 min_tile_x +5, max_tile_y-5 에 도달할 경우 정지 (추적 정지)
+        //조건 4 카메라가 min_tile_x +5, max_tile_y-5 영역에서 탈출할 경우 재추적
+        //조건 3,4 에 대한 상황은 Zoom In 상황
+
+        if(isZoomIn)
         {
-            isTracking = false;
-        }
-        else if(playerScript.transform.position.x >= max_tile_x - 5) //오른쪽
-        {
-            isTracking = false;
+
+            if(isTracking)
+            {
+                if(transform.position.x < min_tile_x + 5)
+                {
+                    isTracking = false;
+                }
+
+                if(transform.position.x > max_tile_x - 5)
+                {
+                    isTracking = false;
+                }
+            }
+            else
+            {
+                if(playerScript.transform.position.x > min_tile_x + 5)
+                {
+                    if(playerScript.transform.position.x < max_tile_x - 5)
+                    {
+                        isTracking = true;
+                    }
+                }
+            }
+
         }
         else
         {
-            isTracking = true;
+            if(max_tile_x + min_tile_x > 30) //맵의 x 크기가 30이상이 아닐 경우 줌 아웃 상태에서 추적 X
+            {
+                if(Mathf.Approximately(transform.position.x, playerScript.transform.position.x))
+                {
+                    isTracking = true;
+                }
+            }
+            else
+            {
+                isTracking = false;
+            }
         }
 
         
@@ -168,97 +190,116 @@ public class CameraControl : MonoBehaviour
 
     void ZoomCamera() //카메라를 줌, 아웃하는 기능. 업데이트에 넣어서 사용
     {
-        if(Input.GetKeyDown(KeyCode.Q) && camera.orthographicSize < Max_Size) //줌 아웃
+        if(Input.GetKeyDown(KeyCode.Q) && camerainfo.orthographicSize < Max_Size && !isZoom) //줌 아웃
         {
-            //Debug.Log("Q");
-            
-            //코루틴을 사용해 구현할 것 - 업데이트를 통해 작동하기 때문에 for문 등의 반복문에 대해서 과도한 사용횟수가 발생 -메모리 과부하
-            
-
-            //StartCoroutine(ZoomControl(true));
-            
-
-            camera.orthographicSize += 1f;
-
-            UpdateCamera(true);
+            StartCoroutine(UpdateCamera(false));
+            isZoom = true;
+            isTracking = false;
+            playerScript.isActing = false;
         }
 
 
-        if(Input.GetKeyDown(KeyCode.E) && camera.orthographicSize > Min_Size) //줌 인
+        if(Input.GetKeyDown(KeyCode.E) && camerainfo.orthographicSize > Min_Size && !isZoom) //줌 인
         {
-            //Debug.Log("E");
-
-            //코루틴을 사용해 구현할 것
-            
-            
-            ///StartCoroutine(ZoomControl(false));
-
-
-
-            camera.orthographicSize -= 1f;
-        
-            UpdateCamera(false);
+            StartCoroutine(UpdateCamera(true));
+            isZoom = true;
+            playerScript.isActing = false;
         }
     }
 
-    void UpdateCamera(bool sign) //sign -> true = 줌인, false = 줌아웃
+
+
+    IEnumerator UpdateCamera(bool sign) //sign -> true = 줌 인, false = 줌 아웃
     {
-        if(transform.position.z > -1)
+        while(true)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -10);
-        }
-        
+            float size;
+            if(sign) size = Min_Size;
+            else size = Max_Size;
 
-        int temp = 1;
+            Vector3 playerPos = playerScript.transform.position;
+            if(playerPos.x <= min_tile_x + Min_Size) //만약 맵의 최소 타일과 카메라의 최소 사이즈를 더한 값보다 플레이어가 멀다면
+            {
+                playerPos.x = min_tile_x + 5;
+            }
+            else if(playerPos.x >= max_tile_x - Min_Size) //만약 맵의 최대 타일과 카메라의 최소 사이즈를 뺀 값보다 플레이어가 멀다면
+            {
+                playerPos.x = max_tile_x - 5;
+            }
 
-        Vector3 playerPos = playerScript.transform.position;
-
-        if(sign) playerPos = BasePos;
-
-        Vector3 currentCameraPosition = cameraTransform.position;
-        Vector3 offsetCamera = playerPos - currentCameraPosition - (playerPos - currentCameraPosition) / (camera.orthographicSize + temp / camera.orthographicSize);
-
-        camera.orthographicSize += 1f;
-
-        currentCameraPosition += offsetCamera;
-        
-        cameraTransform.position = currentCameraPosition;
-
-
-    }
-
-    IEnumerator ZoomControl(bool IsZoom)
-    {
-
-        //int integer = 0;
-        float target_size = 0f;
-
-        if(IsZoom == true) //확대
-        {
-            //integer += 1;
-            target_size = Min_Size;
-        }
-        else if(IsZoom == false) //축소
-        {
-            //integer -= 1;
-            target_size = Max_Size;
-        }
-
-        for(int i = 0; i < 50; i++)
-        {
-            camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, target_size, Time.deltaTime * 50f);
-            camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, Min_Size, Max_Size);
-
-            UpdateCamera(true);
-        }
+            if(playerPos.y <= min_tile_y + 2)
+            {
+                playerPos.y = min_tile_y + 2;
+            }
+            else if(playerPos.y >= max_tile_y - 2)
+            {
+                playerPos.y = max_tile_y - 2;
+            }
 
 
+            //카메라가 조절될 사이즈를 Mathf 를 통해 계산 및 설정
+            target_size = Mathf.SmoothDamp(camerainfo.orthographicSize, size, ref temp, Time.deltaTime * 60f);
+            target_size = Mathf.Clamp(target_size, Min_Size, Max_Size);
 
+            //현재 카메라의 위치를 저장
+            Vector3 currentCameraPosition = cameraTransform.position;  
 
+            //아래에서 경우에 따라 계산되어 현재 카메라의 위치와 더할 변수를 설정
+            Vector3 offsetCamera;
 
-        yield return null; 
-    }
+            //확대 시에는 플레이어를 기준으로 카메라의 위치를 통해 offset값을 조절
+            //축소 시에는 현재 카메라의 위치를 기준으로 기초 카메라 위치를 통해 offset값을 조절
+            if(sign) offsetCamera = playerPos - currentCameraPosition - (playerPos - currentCameraPosition) / (camerainfo.orthographicSize / target_size);
+            else offsetCamera = currentCameraPosition - BasePos - (currentCameraPosition - BasePos) / ( camerainfo.orthographicSize/target_size);
             
+            //2D 환경에서 카메라의 z값이 0이하로 내려가면 오브젝트들이 보이지 않으므로 offset의 z값을 0으로 조절해두기
+            offsetCamera.z = 0f;
+
+            camerainfo.orthographicSize = target_size;
+
+            currentCameraPosition += zoomspeed * offsetCamera;
+            
+            cameraTransform.position = currentCameraPosition;
+
+
+
+            if(Mathf.Approximately(camerainfo.orthographicSize, Max_Size))
+            {
+                isZoom = false;
+                playerScript.isActing = true;
+                isZoomIn = false;
+                target_pos = transform.position;
+                yield break;
+            }
+            else if(Mathf.Approximately(camerainfo.orthographicSize, Min_Size))
+            {
+                isZoom = false;
+                playerScript.isActing = true;
+                isZoomIn = true;
+                target_pos = transform.position;
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+
+    IEnumerator TrasnPos(Vector3 target) //카메라의 좌표를 target으로 보내는 코루틴
+    {
+        while(true)
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, Time.deltaTime * smoothTime);
+            if(Mathf.Approximately(transform.position.x,target.x) && Mathf.Approximately(transform.position.y, target.y))
+            {
+                isControl = false;
+                isActive = true;
+                playerScript.isActing = true;
+                target_pos = target;
+                yield break;
+            }
+            yield return null;
+        }
+    }
 
 
 }

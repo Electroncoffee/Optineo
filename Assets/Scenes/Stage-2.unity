@@ -2868,7 +2868,6 @@ GameObject:
   - component: {fileID: 1764449429}
   - component: {fileID: 1764449428}
   - component: {fileID: 1764449431}
-  - component: {fileID: 1764449432}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: none
@@ -2957,26 +2956,15 @@ MonoBehaviour:
   Max_Size: 0
   Min_Size: 0
   smoothTime: 20
+  zoomspeed: 8
   min_tile_x: 0
   max_tile_x: 16
+  min_tile_y: 0
+  max_tile_y: 4
   isActive: 1
   isControl: 0
   isTracking: 0
---- !u!114 &1764449432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764449427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af6781d43db54a54293fd9395e2fcbf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  current_A: 0
-  current_B: 0
-  target_result: 0
+  isZoom: 0
 --- !u!1001 &1839607248
 PrefabInstance:
   m_ObjectHideFlags: 0
