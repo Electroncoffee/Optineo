@@ -24,7 +24,8 @@ public class CameraControl : MonoBehaviour
 
     public bool isActive = true;
     public bool isControl = false;
-    public bool isTracking = false;
+    public bool isTracking_x = false;
+    public bool isTracking_y = false;
     public bool isZoom = false;
     public bool isZoomIn = false;
 
@@ -121,37 +122,47 @@ public class CameraControl : MonoBehaviour
     void TrackingPlayer() //플레이어를 추적하는 기능
     {
 
-        //조건 1 Zoom Out 상태에서도 카메라의 중앙을 넘어설 경우 캐릭터를 추적
-        //조건 1-1 Zoom Out 상태일 경우 맵의 최소 거리와 최대 거리에 대한 정지 위치가 다름 (씬2와 같은 경우 카메라가 움직이지 않음)
-        //조건 1-2 즉 카메라 Zoom Out 상태인 경우 카메라가 중앙을 넘는 경우에도 minTile+maxtile > 30 이 아닌 경우 추적 X
-        //조건 2 Zoom In 상태일 경우 카메라의 중앙을 넘어설 경우 캐릭터를 추적
-
-        //조건 3 카메라는 min_tile_x +5, max_tile_y-5 에 도달할 경우 정지 (추적 정지)
-        //조건 4 카메라가 min_tile_x +5, max_tile_y-5 영역에서 탈출할 경우 재추적
-        //조건 3,4 에 대한 상황은 Zoom In 상황
-
         if(isZoomIn)
         {
 
-            if(isTracking)
+            if(isTracking_x || isTracking_y)
             {
                 if(transform.position.x < min_tile_x + 5)
                 {
-                    isTracking = false;
+                    isTracking_x = false;
                 }
 
                 if(transform.position.x > max_tile_x - 5)
                 {
-                    isTracking = false;
+                    isTracking_x = false;
+                }
+
+                if(transform.position.y < min_tile_y + 2)
+                {
+                    isTracking_y = false;
+                }
+
+                if(transform.position.y > max_tile_y - 2)
+                {
+                    isTracking_y = false;
                 }
             }
-            else
+
+            if(!isTracking_x || !isTracking_y)
             {
                 if(playerScript.transform.position.x > min_tile_x + 5)
                 {
                     if(playerScript.transform.position.x < max_tile_x - 5)
                     {
-                        isTracking = true;
+                        isTracking_x = true;
+                    }
+                }
+
+                if(playerScript.transform.position.y > min_tile_y + 2)
+                {
+                    if(playerScript.transform.position.y < max_tile_y - 2)
+                    {
+                        isTracking_y = true;
                     }
                 }
             }
@@ -159,30 +170,55 @@ public class CameraControl : MonoBehaviour
         }
         else
         {
-            if(max_tile_x + min_tile_x > 30) //맵의 x 크기가 30이상이 아닐 경우 줌 아웃 상태에서 추적 X
+            if(Mathf.Abs(max_tile_x) + Mathf.Abs(min_tile_x) > 30) //맵의 x 크기가 30이상이 아닐 경우 줌 아웃 상태에서 추적 X
             {
                 if(Mathf.Approximately(transform.position.x, playerScript.transform.position.x))
                 {
-                    isTracking = true;
+                    isTracking_x = true;
                 }
             }
             else
             {
-                isTracking = false;
+                isTracking_x = false;
+            }
+
+
+            if(Mathf.Abs(max_tile_y) + Mathf.Abs(min_tile_y) > 14) //맵의 y 크기가 14 이상이 아닐 경우 줌 아웃 상태에서 추적 X
+            {
+                if(Mathf.Approximately(transform.position.y, playerScript.transform.position.y))
+                {
+                    isTracking_y = true;
+                }
+            }
+            else
+            {
+                isTracking_y = false;
             }
         }
 
         
 
-        if(isTracking && !isControl)
+        if(isTracking_x && !isControl)
         {
-            if(playerScript.transform.position != transform.position && isTracking) //캐릭터 추적
+            if(playerScript.transform.position != transform.position && isTracking_x) //x축에 대한 캐릭터 추적
             {
                 Vector3 tracking_pos = new Vector3(playerScript.transform.position.x, transform.position.y, transform.position.z);
                 transform.position = Vector3.SmoothDamp(transform.position, tracking_pos, ref velocity, Time.deltaTime * smoothTime);
             }
             target_pos = transform.position;
         }
+
+        
+        if(isTracking_y && !isControl)
+        {
+            if(playerScript.transform.position != transform.position && isTracking_y) //y축에 대한 캐릭터 추적
+            {
+                Vector3 tracking_pos = new Vector3(transform.position.x, playerScript.transform.position.y, transform.position.z);
+                transform.position = Vector3.SmoothDamp(transform.position, tracking_pos, ref velocity, Time.deltaTime * smoothTime);
+            }
+            target_pos = transform.position;
+        }
+
 
 
     }
@@ -194,7 +230,8 @@ public class CameraControl : MonoBehaviour
         {
             StartCoroutine(UpdateCamera(false));
             isZoom = true;
-            isTracking = false;
+            isTracking_x = false;
+            isTracking_y = false;
             playerScript.isActing = false;
         }
 

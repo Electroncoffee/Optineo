@@ -1,22 +1,7 @@
 fileFormatVersion: 2
-guid: a9ccfd35a415c644b875223c185cc56a
+guid: f2c9e417c3f51834ca58b13035298ccf
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 5617009488212571757
-    second: 1-2 grid_0
-  - first:
-      213: 3753887588732707907
-    second: 1-2 grid_1
-  - first:
-      213: 398302456384475781
-    second: 1-2 grid_2
-  - first:
-      213: -1700897568148591777
-    second: 1-2 grid_3
-  - first:
-      213: -2613463312645271925
-    second: 1-2 grid_4
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -47,7 +32,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -84,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -96,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -108,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -117,70 +102,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: 1-2 grid_0
-      rect:
-        serializedVersion: 2
-        x: 198
-        y: 628
-        width: 2119
-        height: 1163
-      alignment: 9
-      pivot: {x: 0.8756898, y: 0.0566369}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d66b8ec8e50a3fd40800000000000000
-      internalID: 5617009488212571757
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 1-2 grid_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 198
-        height: 1793
-      alignment: 9
-      pivot: {x: 0.8, y: 0.815}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 344292d7fdc781430800000000000000
-      internalID: 3753887588732707907
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 1-2 grid_2
-      rect:
-        serializedVersion: 2
-        x: 198
-        y: 0
-        width: 2119
-        height: 628
-      alignment: 9
-      pivot: {x: 0.7566236, y: 0.9724357}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 58256f949fd078500800000000000000
-      internalID: 398302456384475781
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
