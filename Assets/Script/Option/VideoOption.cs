@@ -19,12 +19,11 @@ public class VideoOption : MonoBehaviour
 
     void InitUI()
     {
-        // for (int i = 0; i < Screen.resolutions.Length; i++)
-        // {
-        //     if(Screen.resolutions[i].refreshRate == 60)
-        //         resolutions.Add(Screen.resolutions[i]);
-        // } 해당 코드는 분류를 위한 코드 (ex 프레임 60 해상도만 표시하기 등)
-        resolutions.AddRange(Screen.resolutions);
+        for (int i = 0; i < Screen.resolutions.Length; i++)
+        {
+            if(Screen.resolutions[i].refreshRate == 60)
+                resolutions.Add(Screen.resolutions[i]);
+        }
         resolutionDropdown.options.Clear();
 
         int optionNum = 0;

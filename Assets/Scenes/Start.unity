@@ -2135,7 +2135,7 @@ GameObject:
   - component: {fileID: 620171968}
   - component: {fileID: 620171967}
   m_Layer: 5
-  m_Name: Button
+  m_Name: OKBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2158,7 +2158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 464.17456, y: -204.01059}
+  m_AnchoredPosition: {x: 0, y: -99}
   m_SizeDelta: {x: 145.6508, y: 35.9788}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &620171967
@@ -3327,7 +3327,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: OK
 --- !u!222 &872999776
 CanvasRenderer:
   m_ObjectHideFlags: 0
