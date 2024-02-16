@@ -9,10 +9,19 @@ public enum Sound
 }
 public class SoundManager : MonoBehaviour
 {
-    AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
+    public AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+
+    public float bgmVolume = 1.0f;
+    public float sfxVolume = 1.0f;
+
+    
+
+
+    
     public void Awake()
     {
+
         GameObject root = GameObject.Find("@Sound");
         if (root == null)
         {
@@ -28,6 +37,10 @@ public class SoundManager : MonoBehaviour
             }
 
             _audioSources[(int)Sound.Bgm].loop = true; // bgm 재생기는 무한 반복 재생
+            _audioSources[(int)Sound.Bgm].volume = bgmVolume;
+            _audioSources[(int)Sound.Effect].volume = sfxVolume;
+
+            
         }
     }
     public void Clear()
@@ -55,6 +68,7 @@ public class SoundManager : MonoBehaviour
             audioSource.pitch = pitch;
             audioSource.clip = audioClip;
             audioSource.Play();
+            
         }
         else // Effect 효과음 재생
         {

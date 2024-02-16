@@ -356,6 +356,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &29073777 stripped
@@ -426,6 +430,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &45244800 stripped
@@ -625,6 +633,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &162570801 stripped
@@ -695,6 +707,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &229849272 stripped
@@ -1239,6 +1255,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &506785566 stripped
@@ -1309,6 +1329,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &565257923 stripped
@@ -1379,6 +1403,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &850915065 stripped
@@ -1449,6 +1477,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &897804879 stripped
@@ -1865,6 +1897,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c99db8ff2b50016458761459a9698ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1047405349 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2022462685834858551, guid: 1c8b67224e0e4f647b9583fcefd65a1a, type: 3}
+  m_PrefabInstance: {fileID: 1047405345}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced7b3f7cb21ba44294364e08b674528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1052570038
@@ -2399,7 +2442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3652555032054969774, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 3652555032054969774, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2441,6 +2484,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &1423824544 stripped
@@ -2535,7 +2582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3652555032054969774, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3652555032054969774, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2577,6 +2624,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &1616116275 stripped
@@ -2676,7 +2727,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659827140}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: 5, z: 0}
+  m_LocalPosition: {x: 8.02, y: 5.02, z: 0}
   m_LocalScale: {x: 17, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1420201776}
@@ -2879,6 +2930,7 @@ GameObject:
   - component: {fileID: 1764449430}
   - component: {fileID: 1764449429}
   - component: {fileID: 1764449428}
+  - component: {fileID: 1764449431}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: none
@@ -2951,6 +3003,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1764449431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764449427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb66df81ebb3ce24fb798c909d883657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScript: {fileID: 24863349}
+  Max_Size: 0
+  Min_Size: 0
+  smoothTime: 20
+  zoomspeed: 8
+  min_tile_x: 0
+  max_tile_x: 16
+  min_tile_y: 0
+  max_tile_y: 4
+  isActive: 1
+  isControl: 0
+  isTracking_x: 0
+  isTracking_y: 0
+  isZoom: 0
+  isZoomIn: 0
 --- !u!1001 &1839607248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3014,6 +3093,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &1839607249 stripped
@@ -3150,6 +3233,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &2126082467 stripped
@@ -3480,6 +3567,10 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 24863349}
+    - target: {fileID: 6931175062075110519, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1047405349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c652dfc15af7b5948885710d012a7ce7, type: 3}
 --- !u!4 &6388390051143659677 stripped
