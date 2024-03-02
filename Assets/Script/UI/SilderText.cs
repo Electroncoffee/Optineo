@@ -16,6 +16,9 @@ public class SilderText : MonoBehaviour
     {
         float temp = slider.value;
         text.text = slider.value.ToString();
+
         text.text += "%";
     }
+
+
 }
