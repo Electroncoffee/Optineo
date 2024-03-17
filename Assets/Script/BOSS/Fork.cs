@@ -6,17 +6,33 @@ public class Fork : MonoBehaviour
 {
 
     public PlayerMove player;
-    float disspawn_time = 2.4f;
+    public ObjectLayerManager LayerManager;
+    public BoxCollider2D colider2d;
+    Animator anim;
+    float disspawn_time = 1f;
     float stay_time = 0;
 
-    void Awkae()
+    void Awake()
     {
+        colider2d = GetComponent<BoxCollider2D>();
+        player = FindObjectOfType<PlayerMove>().GetComponent<PlayerMove>();
+        LayerManager = FindObjectOfType<ObjectLayerManager>().GetComponent<ObjectLayerManager>();
+        anim = transform.GetComponent<Animator>();
+        anim.Play("Fork_hitGround");
         
     }
     
 
     void Update()
     {
+        if(colider2d.enabled)
+        {
+            if(transform.position == player.transform.position)
+            {
+                Attack();
+            }
+        }
+
         stay_time += Time.deltaTime;
 
         if(stay_time > disspawn_time)
@@ -25,18 +41,21 @@ public class Fork : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject == player.gameObject)
-        {
-            //플레이어 사망
-            player.dead();
-            Debug.Log("Death");
-        }
+    void Attack()
+    {
+        player.dead();
+        Debug.Log("Death");
+        killed();
+        Time.timeScale = 0;
     }
+
+
 
     void killed()
     {
-        //보스의 특정 패턴에 의한 사망
+        //일정 시간 이후 제거
+        LayerManager.RemoveObject(gameObject);
+
         Destroy(gameObject);
     }
 }

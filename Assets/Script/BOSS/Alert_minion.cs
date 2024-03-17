@@ -4,7 +4,7 @@ using UnityEngine.Timeline;
 public class Alert_minion : MonoBehaviour, icall
 {
     
-    public float spawn_time = 4.8f; //미니언 소환까지의 시간
+    public float spawn_time = 3f; //미니언 소환까지의 시간
     public GameObject minion;
     
     Animator anim;

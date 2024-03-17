@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Alert_Fork : MonoBehaviour
 {
-    public float spawn_time = 4.8f; //미니언 소환까지의 시간
+    public float spawn_time = 3f; //미니언 소환까지의 시간
     public GameObject Fork;
     
     Animator anim;
@@ -26,7 +26,7 @@ public class Alert_Fork : MonoBehaviour
 
     void spawn_Fork()
     {
-        Instantiate(Fork, transform.position, Quaternion.Euler(0,0,0), transform.parent);
+        Instantiate(Fork, transform.position, Quaternion.Euler(0,0,180), transform.parent);
         Destroy(gameObject);
     }
 

@@ -31,6 +31,14 @@ public class Boss : MonoBehaviour
 
     [Header("Pattern Cooltime")]
     public bool isPattern = false; //패턴이 진행 중일 때 다른 패턴이 겹치지 않도록 하기 위함
+
+    [Header("Debug")]
+    public float pattern_col = 3f;
+    float pattern_timer = 0;
+    public bool minion_spawn = true;
+    public bool fork_spawn = true;
+    public bool oil_spawn = true;
+    public bool thorns_spawn = true;
     
     void Awake()
     {
@@ -40,11 +48,13 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
+        if(!isPattern && pattern_timer < pattern_col) pattern_timer += Time.deltaTime;
         if(minion_timer < minion_coltime) minion_timer += Time.deltaTime;
         if(Fork_timer < Fork_coltime) Fork_timer += Time.deltaTime;
         instance_death();
 
-        if(!isPattern)
+
+        if(!isPattern && pattern_timer > pattern_col)
         {
             if(count > 3)
             {
@@ -58,19 +68,20 @@ public class Boss : MonoBehaviour
             switch(ran)
             {
                 case 0:
-                    spawn_Minion();
+                    if(minion_spawn) spawn_Minion();
                     break;
                 case 1:
-                    spawn_Fork();
+                    if(fork_spawn) spawn_Fork();
                     break;
                 case 2:
-                    Oil_overflow();
+                    if(oil_spawn) Oil_overflow();
                     break;
                 case 3:
-                    Thorns_Rulker();
+                    if(thorns_spawn) Thorns_Rulker();
                     break;
 
             }
+            pattern_timer = 0;
         }
 
     }
@@ -250,7 +261,8 @@ public class Boss : MonoBehaviour
 
     void Rage_Berserk()
     {
-
+        //페이즈의 개념으로 보면 편함
+        //총 3페이즈가 있을 예정
     }
     
     void Rage_Howl()
@@ -260,7 +272,8 @@ public class Boss : MonoBehaviour
 
     void Oil_overflow()
     {
-
+        //세로 2줄 정도의 범위를 가질 예정
+        //+가능하면 미니언이 밀려나면 더 좋을듯
     }
 
     void Thorns_Rulker()
