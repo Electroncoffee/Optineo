@@ -7,7 +7,7 @@ public class Boss : MonoBehaviour
     //공용 변수
     [Header("Public Variable")]
     public GameObject boss;
-    Collider2D col;
+    public Collider2D col;
     Vector2 size = new Vector2 (63/64, 63/64);
 
     //플레이어 관련 변수
@@ -20,21 +20,26 @@ public class Boss : MonoBehaviour
     [Header("Minion")]
     public GameObject Alert_minion;
     public float minion_coltime = 3f;
-    float minion_timer;
+    float minion_timer = 0;
 
     //포크, 나이프 관련 변수
     [Header("Fork")]
     public GameObject Alert_Fork;
     public float Fork_coltime = 3f;
-    float Fork_timer;
+    float Fork_timer = 0;
     public int Fork_Number = 4; //한번에 소환될 포크의 개수
+
+    [Header("Thorn")]
+    public GameObject Alert_Thorn;
+    public float thorn_coltime = 3f;
+    float thorn_timer = 0;
 
     [Header("Pattern Cooltime")]
     public bool isPattern = false; //패턴이 진행 중일 때 다른 패턴이 겹치지 않도록 하기 위함
-
-    [Header("Debug")]
     public float pattern_col = 3f;
     float pattern_timer = 0;
+
+    [Header("Debug")]
     public bool minion_spawn = true;
     public bool fork_spawn = true;
     public bool oil_spawn = true;
@@ -51,6 +56,7 @@ public class Boss : MonoBehaviour
         if(!isPattern && pattern_timer < pattern_col) pattern_timer += Time.deltaTime;
         if(minion_timer < minion_coltime) minion_timer += Time.deltaTime;
         if(Fork_timer < Fork_coltime) Fork_timer += Time.deltaTime;
+        if(thorn_timer < thorn_coltime) thorn_timer += Time.deltaTime;
         instance_death();
 
 
@@ -107,10 +113,8 @@ public class Boss : MonoBehaviour
     void spawn_Minion()
     {
 
-        if(minion_timer < minion_coltime)
-        {
-            return;
-        }
+        if(minion_timer < minion_coltime) return;
+
 
 
         isPattern = true;
@@ -174,10 +178,8 @@ public class Boss : MonoBehaviour
     void spawn_Fork()
     {
 
-        if(Fork_timer < Fork_coltime)
-        {
-            return;
-        }
+        if(Fork_timer < Fork_coltime) return;
+
 
         isPattern = true;
 
@@ -278,7 +280,50 @@ public class Boss : MonoBehaviour
 
     void Thorns_Rulker()
     {
+        if(thorn_timer < thorn_coltime) return;
 
+        isPattern = true;
+
+        Vector2[] target_pos = new Vector2[5];
+        Vector2 playerPos = playerScript.transform.position;
+        int target_pos_x = Random.Range(-2,2);
+        int target_pos_y = 4;
+
+        for(int i = 0; i < 5; i++)
+        {
+            target_pos[i] = new Vector2(target_pos_x, target_pos_y);
+
+            if(playerPos.x > target_pos_x)
+            {
+                target_pos_x++;
+                target_pos_y--;
+            }
+            else if(playerPos.x < target_pos_x)
+            {
+                target_pos_x--;
+                target_pos_y--;
+            }
+            else if(playerPos.x == target_pos_x)
+            {
+                target_pos_y--;
+            }
+        }
+
+        for(int i = 0 ; i < 5 ; i++)
+        {
+            col = Physics2D.OverlapBox(target_pos[i], size, 0, LayerMask.GetMask("Block", "Object", "Field"));
+
+            if(col == null)
+            {
+                Instantiate(Alert_Thorn, target_pos[i], Quaternion.Euler(0,0,0), transform);
+            }
+            else
+            {
+                continue;
+            }
+        }
+
+        StartCoroutine(isPatternSwitch(false, 5f));
     }
 
     void Tongue_injection()
